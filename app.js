@@ -1,20 +1,21 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+import express from 'express';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
 
-var indexRouter = require('./routes/index');
-var apiRouter = require('./routes/api');
+import indexRouter from './routes/index.js';
+import apiRouter from './routes/api.js';
 
-var app = express();
+const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(express.static('public'));
 
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
 
-module.exports = app;
+export default app;

@@ -1,6 +1,6 @@
-var express = require('express');
-var router = express.Router();
+import express from 'express';
 
+const router = express.Router();
 
 router.get('/', function(req, res, next) {
   const result = { message: 'API is working' };
@@ -13,4 +13,4 @@ router.post('/submit-form', function(req, res, next) {
   res.json({ message: 'Form submitted successfully', data: formData });
 });
 
-module.exports = router;
+export default router;
