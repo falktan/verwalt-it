@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
+
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  const result = { message: 'API is working' };
+  res.json(result);
+  // res.send();
 });
 
 module.exports = router;
