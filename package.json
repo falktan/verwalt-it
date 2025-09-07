@@ -1,0 +1,30 @@
+{
+  "name": "verwalt-it",
+  "version": "1.0.0",
+  "description": "Webanwendung zum Bereitstellen von Formularen und Workflows für Verwaltungen",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx live-server src",
+    "start": "npx serve src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/falktan/verwalt-it.git"
+  },
+  "keywords": [
+    "verwaltung",
+    "workflow",
+    "formulare"
+  ],
+  "author": "Falk Tandetzky",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/falktan/verwalt-it/issues"
+  },
+  "homepage": "https://github.com/falktan/verwalt-it#readme",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "serve": "^14.2.5"
+  }
+}
