@@ -11,7 +11,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static('public'));
+app.use(express.static('public', { extensions: ['html'] }));
 app.use('/api', apiRouter);
 app.set('port', port);
 
