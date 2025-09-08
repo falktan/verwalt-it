@@ -1,4 +1,5 @@
 import express from 'express';
+import renderEmail from './renderEmail.js';
 
 const router = express.Router();
 
@@ -9,8 +10,10 @@ router.get('/', function(req, res, next) {
 
 router.post('/submit-form', function(req, res, next) {
   const formData = req.body;
-  // Process the form data as needed
-  res.json({ message: 'Form submitted successfully', data: formData });
+
+  const {subject, body} = renderEmail(formData);
+
+  res.json({ message: 'Anmeldung erfolgreich abgesendet', email: { to: formData.email, subject, body } });
 });
 
 export default router;
