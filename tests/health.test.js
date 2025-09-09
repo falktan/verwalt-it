@@ -1,0 +1,45 @@
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import apiRouter from '../api/index.js';
+import http from 'http';
+
+// Create test app instance
+function createTestApp() {
+  const app = express();
+  app.use(logger('dev'));
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: false }));
+  app.use(cookieParser());
+  app.use(express.static('public', { extensions: ['html'] }));
+  app.use('/api', apiRouter);
+  return app;
+}
+
+describe('Health Endpoint', () => {
+  let server;
+  let port;
+
+  beforeAll((done) => {
+    const app = createTestApp();
+    server = http.createServer(app);
+    server.listen(0, () => {
+      port = server.address().port;
+      done();
+    });
+  });
+
+  afterAll((done) => {
+    server.close(done);
+  });
+
+  test('GET /api/health should return status ok', async () => {
+    const response = await fetch(`http://localhost:${port}/api/health`);
+    const data = await response.json();
+    
+    expect(response.status).toBe(200);
+    expect(data.status).toBe('ok');
+    expect(data.timestamp).toBeDefined();
+    expect(new Date(data.timestamp)).toBeInstanceOf(Date);
+  });
+});
