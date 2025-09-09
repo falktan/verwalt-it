@@ -8,6 +8,23 @@ Aktuell ermöglicht die Anwendung die Anmeldung zur Abschlussarbeit. Nutzer kön
 ## Tools
 * npm, express, dotenv, mongoDB
 
+## Entwicklung
+
+### Installieren der Abhängigkeiten
+
+```
+# --omit-dev avoids installation of an actual in memory MongoDB.
+# This is a bit faster. Also for copilot this is the only way this works, as
+# installation of the MongoDB fails for the copilot agent running in Github.
+
+npm install --omit=dev
+```
+
+### Start der Anwendung
+```
+npm start
+```
+
 ## Verzeichnisstuktur
 
 ```
