@@ -8,26 +8,23 @@ Verwalt-it is a German Node.js/Express web application for administrative form s
 
 ### Bootstrap and Install Dependencies
 ```bash
-npm install --omit=dev
+npm install
 ```
 - Takes under 20 seconds. NEVER CANCEL.
-- The `--omit=dev` flag is REQUIRED to avoid MongoDB installation issues in restricted environments
-- Installing with just `npm install` causes errors
 
 ### Start the Application
 **ALWAYS use the mock database configuration for development and testing:**
 ```bash
 USE_MOCK_DB=true npm start
 ```
-- Starts quickly (under 10 seconds). NEVER CANCEL.
+- Starts quickly (under 10 seconds).
 - Application runs on port 3000
-- Shows "Using Mock MongoDB" message when started correctly
 - Application serves static frontend files from `public/` directory
 
 ### Verify Application is Working
 Test the health endpoint:
 ```bash
-curl -s http://localhost:3000/api/health | jq .
+curl -s http://localhost:3000/api/health
 ```
 Should return: `{"status": "ok", "timestamp": "..."}`
 
@@ -97,15 +94,12 @@ USE_MOCK_DB=true npm start
 ## Environment Variables
 
 - `USE_MOCK_DB=true` - Enable mock database (recommended)
-- `USE_IN_MEMORY_DB=true` - Enable in-memory MongoDB (fails in restricted environments)
-- `MONGODB_URL` - Real MongoDB connection string (not needed for development)
-- `BASE_URL` - Base URL for email links (optional, used in email templates)
 
 ## Common Commands and Timings
 
 | Command | Expected Time | Timeout | Notes |
 |---------|---------------|---------|-------|
-| `npm install --omit=dev` | < 15 seconds | 60 seconds | REQUIRED flag for restricted environments |
+| `npm install` | < 15 seconds | 60 seconds | REQUIRED flag for restricted environments |
 | `USE_MOCK_DB=true npm start` | < 10 seconds | 30 seconds | Recommended startup method |
 | `curl http://localhost:3000/api/health` | < 1 second | 10 seconds | Health check |
 
@@ -114,11 +108,6 @@ USE_MOCK_DB=true npm start
 ### Application Won't Start
 - **Error: "Cannot find package 'mongodb-memory-server'"**
   - Always use `USE_MOCK_DB=true npm start` to start the app
-
-### Network/Download Errors
-- **Error: "getaddrinfo ENOTFOUND fastdl.mongodb.org"**
-  - In-memory MongoDB cannot download binaries
-  - install with `npm install --omit=dev`
 
 ### Testing Failures
 - Always test the complete workflow: homepage → form → submission → confirmation
@@ -133,14 +122,11 @@ USE_MOCK_DB=true npm start
 - Static files served directly from `public/` directory
 - Uses Pico CSS framework via CDN for styling
 - Form submission via fetch API with JSON payloads
-- Database abstraction allows swapping between mock, in-memory, and real MongoDB
 
 ## Critical Reminders
 
-- **ALWAYS install with `npm install --omit=dev`**
-- **ALWAYS use `USE_MOCK_DB=true npm start`** for development
 - **NEVER attempt to use in-memory or real MongoDB**
-- **ALWAYS test complete user workflows** after making changes
+- **test complete user workflows** after making changes
 - **Form validation happens client-side** - server accepts any JSON payload
 - **Email functionality is simulated** - emails are returned as JSON responses
 - **No authentication or authorization** is implemented

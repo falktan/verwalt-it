@@ -13,17 +13,27 @@ Aktuell ermöglicht die Anwendung die Anmeldung zur Abschlussarbeit. Nutzer kön
 ### Installieren der Abhängigkeiten
 
 ```
-# --omit-dev avoids installation of an actual in memory MongoDB.
-# This is a bit faster. Also for copilot this is the only way this works, as
-# installation of the MongoDB fails for the copilot agent running in Github.
-
-npm install --omit=dev
+npm install
 ```
 
 ### Start der Anwendung
 ```
 npm start
 ```
+
+### MongoDB Varianten
+Die App ist in der .env so konfiguriert, das für die MongoDB ein einfacher Mock verwendet wird.
+Um einer echten MongoDB näher zu kommen kann auch eine in-memory MongoDB installiert werden:
+```
+npm install mongodb-memory-server@10.2.0
+```
+Über die Umgebungsvariablen kann man diese dann verwenden:
+```
+USE_IN_MEMORY_DB=true
+USE_MOCK_DB=false
+```
+Das Packet ist nicht in den normalen- oder dev-dependencies, damit das repo einfach und schnell mit
+dem üblichen `npm install` Komando installiert werden kann. Das ist insbesondere für Copilot in der Github Umgebung relevant, weil dort die Installation wegen Netzwerkeinschränkungen fehlschlägt.
 
 ## Verzeichnisstuktur
 
@@ -43,7 +53,7 @@ npm start
 └───public  # the frontend. Static sites served without processing
     │   index.html  # start page
     │   main.js
-    │   style.css
+    │   style.css  # one style file used everywhere
     │
     ├───assets
     │       logo.png
@@ -53,7 +63,4 @@ npm start
         │   confirm.js
         │   index.html
         │   main.js
-        │
-        └───datenschutzerklaertung
-                index.html
 ```
