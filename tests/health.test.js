@@ -3,25 +3,15 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import apiRouter from '../api/index.js';
 import http from 'http';
+import createApp from '../createApp.js';
 
-// Create test app instance
-function createTestApp() {
-  const app = express();
-  app.use(logger('dev'));
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: false }));
-  app.use(cookieParser());
-  app.use(express.static('public', { extensions: ['html'] }));
-  app.use('/api', apiRouter);
-  return app;
-}
 
 describe('Health Endpoint', () => {
   let server;
   let port;
 
   beforeAll((done) => {
-    const app = createTestApp();
+    const app = createApp();
     server = http.createServer(app);
     server.listen(0, () => {
       port = server.address().port;
