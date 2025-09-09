@@ -1,7 +1,3 @@
-import express from 'express';
-import cookieParser from 'cookie-parser';
-import logger from 'morgan';
-import apiRouter from '../api/index.js';
 import http from 'http';
 import createApp from '../createApp.js';
 
