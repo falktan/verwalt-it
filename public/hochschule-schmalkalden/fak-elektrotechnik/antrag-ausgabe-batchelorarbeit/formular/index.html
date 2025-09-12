@@ -1,0 +1,106 @@
+<html>
+<head>
+  <title>Antrag auf Ausgabe einer Bachelorarbeit</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@latest/css/pico.classless.min.css">
+  <link rel="stylesheet" href="/style.css">
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <div class="main">
+    <div class="nav">
+      <a href="../"> <img class="logo" src="https://www.hs-schmalkalden.de/typo3conf/ext/hsm_sitepackage/Resources/Public/Images/logo.jpg" alt="Logo Hochschule Schmalkalden"> </a>
+      <br/>
+    </div>
+    <div class="content">
+      <h1>Antrag auf Ausgabe einer Bachelorarbeit</h1>
+      <form onsubmit="handleFormSubmit(event)">
+
+        <h2>Antragsteller</h2>
+
+        <label for="nachname">Name:</label>
+        <input type="text" id="nachname" name="nachname">
+        <label for="vorname">Vorname:</label>
+        <input type="text" id="vorname" name="vorname">
+        <label for="geburtsdatum">Geburtsdatum:</label>
+        <input type="date" id="geburtsdatum" name="geburtsdatum">
+        <label for="geburtsort">Geburtsort:</label>
+        <input type="text" id="geburtsort" name="geburtsort">
+        <label for="matrikelnummer">Matrikelnummer:</label>
+        <input type="text" id="matrikelnummer" name="matrikelnummer">
+        <label for="wohnanschrift">Hauptwohnanschrift (Strasse/Nr.):</label>
+        <input type="text" id="wohnanschrift" name="wohnanschrift">
+        <label for="plz_ort">PLZ/Ort:</label>
+        <input type="text" id="plz_ort" name="plz_ort">
+        <label for="email">E-Mail-Adresse:</label>
+        <input type="email" id="email" name="email">
+        <label for="studiengang">Studiengang:</label>
+        <select id="studiengang" name="studiengang">
+          <option value="undefined">-- bitte wählen --</option>
+          <option value="Health Tech (215)">Health Tech (215)</option>
+          <option value="EEAT (316)">EEAT (316)</option>
+          <option value="Medizintechnik (216)">Medizintechnik (216)</option>
+          <option value="IT (722)">IT (722)</option>
+          <option value="WIW-Digital. (179-025)">WIW-Digital. (179-025)</option>
+          <option value="WIW-TM (179-044)">WIW-TM (179-044)</option>
+          <option value="ET u. IT (222)">ET u. IT (222)</option>
+        </select>
+        <label for="vertiefungsrichtung">Vertiefungsrichtung:</label>
+        <input type="text" id="vertiefungsrichtung" name="vertiefungsrichtung">
+        <label for="thema">Thema der Bachelorarbeit (voraussichtlicher Wortlaut, kein Arbeitstitel):</label>
+        <textarea id="thema" name="thema"></textarea>
+        <label for="erste_bachelorarbeit">Ist das Ihre erste Bachelorarbeit in diesem Studiengang?</label>
+        <select id="erste_bachelorarbeit" name="erste_bachelorarbeit">
+          <option value="undefined">-- bitte wählen --</option>
+          <option value="ja">ja</option>
+          <option value="nein">nein</option>
+        </select>
+        <label for="einzelarbeit">Die beantragte Bachelorarbeit ist eine Einzelarbeit:</label>
+        <select id="einzelarbeit" name="einzelarbeit">
+          <option value="undefined">-- bitte wählen --</option>
+          <option value="ja">ja</option>
+          <option value="nein">nein</option>
+        </select>
+        <label for="weitere_bearbeiter">Falls nein: Auflistung weiterer Bearbeiter:</label>
+        <input type="text" id="weitere_bearbeiter" name="weitere_bearbeiter">
+        <label for="noch_zu_erbringen">Im aktuellen Studiengang habe ich noch folgende Prüfungs- oder Studienleistungen gemäß Studienordnung zu erbringen:</label>
+        <input type="text" id="noch_zu_erbringen" name="noch_zu_erbringen">
+
+        <h2>Bearbeitungsort</h2>
+
+        <label for="unternehmen_institution">Die Bachelorarbeit wird durchgeführt im Unternehmen/an der Institution (Bezeichnung):</label>
+        <input type="text" id="unternehmen_institution" name="unternehmen_institution">
+        <label for="arbeitsort">Anschrift des Arbeitsortes:</label>
+        <textarea id="arbeitsort" name="arbeitsort"></textarea>
+        <h3>Betrieblicher Betreuer</h3>
+        <label for="betreuer_betrieblich_name">Name:</label>
+        <input type="text" id="betreuer_betrieblich_name" name="betreuer_betrieblich_name">
+        <label for="betreuer_betrieblich_tel">Telefon:</label>
+        <input type="tel" id="betreuer_betrieblich_tel" name="betreuer_betrieblich_tel">
+        <label for="betreuer_betrieblich_email">E-Mail:</label>
+        <input type="email" id="betreuer_betrieblich_email" name="betreuer_betrieblich_email">
+        <h3>Referentenvorschlag</h3>
+        <h4>Referent und Hochschulbetreuer</h4>
+        <label for="hochschulbetreuer_grad">Akadem. Grad:</label>
+        <input type="text" id="hochschulbetreuer_grad" name="hochschulbetreuer_grad">
+        <label for="hochschulbetreuer_name">Name:</label>
+        <input type="text" id="hochschulbetreuer_name" name="hochschulbetreuer_name">
+        <label for="hochschulbetreuer_tel">Telefon:</label>
+        <input type="tel" id="hochschulbetreuer_tel" name="hochschulbetreuer_tel">
+        <label for="hochschulbetreuer_email">E-Mail:</label>
+        <input type="email" id="hochschulbetreuer_email" name="hochschulbetreuer_email">
+        <h4>Korreferent</h4>
+        <label for="korreferent_grad">Akadem. Grad:</label>
+        <input type="text" id="korreferent_grad" name="korreferent_grad">
+        <label for="korreferent_name">Name:</label>
+        <input type="text" id="korreferent_name" name="korreferent_name">
+        <label for="korreferent_tel">Telefon:</label>
+        <input type="tel" id="korreferent_tel" name="korreferent_tel">
+        <label for="korreferent_email">E-Mail:</label>
+        <input type="email" id="korreferent_email" name="korreferent_email">
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

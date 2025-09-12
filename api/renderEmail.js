@@ -1,6 +1,7 @@
 import 'dotenv/config';
 
 export default function renderEmail({formData, token}) {
+  const email = process.env.EMAIL_TO;
   const subject = `Anmeldung der Abschlussarbeit`;
   const body = `
     Sehr geehrte Damen und Herren,
@@ -10,5 +11,5 @@ export default function renderEmail({formData, token}) {
     ${process.env.BASE_URL}/form/confirm?token=${token}
   `;
 
-  return { subject, body };
+  return { email, subject, body };
 }

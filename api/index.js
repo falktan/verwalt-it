@@ -1,6 +1,7 @@
 import express from 'express';
 import renderEmail from './renderEmail.js';
 import { saveSubmission, getSubmissionById } from './dataStore.js';
+import { sendMail } from './email.js';
 
 
 const router = express.Router();
@@ -14,9 +15,11 @@ router.post('/submit-form', async function(req, res, next) {
   const formData = req.body;
 
   const id = await saveSubmission(formData);
-  const {subject, body} = renderEmail({formData, token: id});
+  const {email, subject, body} = renderEmail({formData, token: id});
 
-  res.json({ message: 'Anmeldung erfolgreich abgesendet', email: { to: formData.email, subject, body } });
+  await sendMail(email, subject, body);
+
+  res.json({ message: 'Anmeldung erfolgreich abgesendet', email: { email, subject, body } });
 });
 
 router.post('/get-form-data', async function(req, res, next) {
