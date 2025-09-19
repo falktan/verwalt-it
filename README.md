@@ -1,5 +1,9 @@
 # verwalt-it
-Webanwendung zum Bereitstellen von Formularen und Workflows für Verwaltungen
+Webanwendung zum Bereitstellen von Formularen und Workflows für Verwaltungen.
+Der jeweils aktuelle Entwicklungsstand ist hier erreichbar: https://verwalt-it-6e1f6e3175e9.herokuapp.com/
+
+
+Die Anwendung ist noch nicht produktiv im Einsatz.
 
 ## Umgesetzter Usecase: Anmeldung zur Abschlussarbeit
 
