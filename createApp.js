@@ -5,8 +5,9 @@ import apiRouter from './api/index.js';
 import 'dotenv/config';
 
 
+const port = process.env.PORT || 3000;
+
 export default function createApp() {
-    const port = '3000';
     const app = express();
     app.use(logger('dev'));
     app.use(express.json());
