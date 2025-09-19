@@ -2,28 +2,19 @@ body {
   padding: 50px;
 }
 
-.main {
-  max-width: 800px;
-  margin: auto;
+.content-wrapper {
+max-width: 800px;
+margin: auto;
 }
 
-.nav {
-  background-color: #f8f8f8;
-  padding: 20px 20px;
-  margin: 20px 0px;
-  /* text-align: center; */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.nav-bar {
+background-color: #f8f8f8;
+padding: 20px 20px;
+margin: 20px 0px;
+/* text-align: center; */
+box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .logo {
-  height: 120px;
-}
-
-details[open] summary ~ * {
-  animation: sweep .5s ease-in-out;
-}
-
-@keyframes sweep {
-  0%    {opacity: 0; margin-left: -10px}
-  100%  {opacity: 1; margin-left: 0px}
+height: 120px;
 }
