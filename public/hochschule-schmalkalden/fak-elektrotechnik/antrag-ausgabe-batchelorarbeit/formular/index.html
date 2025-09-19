@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="de">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,13 +11,14 @@
 
 <body>
   <verwalt-it-content-wrapper>
-    <img slot="logo" src="https://www.hs-schmalkalden.de/typo3conf/ext/hsm_sitepackage/Resources/Public/Images/logo.jpg" alt="Logo Hochschule Schmalkalden"> 
+    <img slot="logo" src="https://www.hs-schmalkalden.de/typo3conf/ext/hsm_sitepackage/Resources/Public/Images/logo.jpg"
+      alt="Logo Hochschule Schmalkalden">
     <h1>Antrag auf Ausgabe einer Bachelorarbeit</h1>
     <form onsubmit="handleFormSubmit(event)">
 
       <h2>Antragsteller</h2>
 
-      <label for="nachname">Name:</label>
+      <label for="nachname">Nachname:</label>
       <input type="text" id="nachname" name="nachname">
       <label for="vorname">Vorname:</label>
       <input type="text" id="vorname" name="vorname">
@@ -61,12 +63,14 @@
       </select>
       <label for="weitere_bearbeiter">Falls nein: Auflistung weiterer Bearbeiter:</label>
       <input type="text" id="weitere_bearbeiter" name="weitere_bearbeiter">
-      <label for="noch_zu_erbringen">Im aktuellen Studiengang habe ich noch folgende Prüfungs- oder Studienleistungen gemäß Studienordnung zu erbringen:</label>
+      <label for="noch_zu_erbringen">Im aktuellen Studiengang habe ich noch folgende Prüfungs- oder Studienleistungen
+        gemäß Studienordnung zu erbringen:</label>
       <input type="text" id="noch_zu_erbringen" name="noch_zu_erbringen">
 
       <h2>Bearbeitungsort</h2>
 
-      <label for="unternehmen_institution">Die Bachelorarbeit wird durchgeführt im Unternehmen/an der Institution (Bezeichnung):</label>
+      <label for="unternehmen_institution">Die Bachelorarbeit wird durchgeführt im Unternehmen/an der Institution
+        (Bezeichnung):</label>
       <input type="text" id="unternehmen_institution" name="unternehmen_institution">
       <label for="arbeitsort">Anschrift des Arbeitsortes:</label>
       <textarea id="arbeitsort" name="arbeitsort"></textarea>
@@ -97,7 +101,7 @@
       <label for="korreferent_email">E-Mail:</label>
       <input type="email" id="korreferent_email" name="korreferent_email">
     </form>
-  </div>
+    </div>
 </body>
 
 </html>
