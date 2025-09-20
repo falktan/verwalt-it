@@ -9,6 +9,8 @@ Die Anwendung ist noch nicht produktiv im Einsatz.
 
 Aktuell ermöglicht die Anwendung die Anmeldung zur Abschlussarbeit. Nutzer können sich über ein Formular registrieren und ihre relevanten Daten eingeben. Die Anwendung speichert diese. Dem angegebenen Betreuer wird eine Email gesendet, welche einen Link enthält, welche es erlaubt das Formular einzusehen und zu bestätigen.
 
+![Antrag auf Ausgabe der Bachelorarbeit](docs/hochschule_schmalkalden/antrag_auf_ausgabe_der_batchelorarbeit.png)
+
 ## Tools
 * npm, express, dotenv, mongoDB
 
@@ -74,31 +76,30 @@ Abhängigkeit.
 - `POST /api/get-form-data` – Formulardaten per Token abrufen
 
 ## Verzeichnisstuktur
-
 ```
-│   .env  # configuration based on "dotenv"
-│   app.js  # main entry point
-│   package.json
-│   README.md  # this readme
+├── server.js           # Main Express server entry point
+├── package.json        # Dependencies and scripts
+├── .env                # Konfiguration über "dotenv"
 │
-├───api  # the backend
-│       dataStore.js
-│       dbConnect.js
-│       index.js
-│       mockDatabase.js
-│       renderEmail.js
+├── api/                # Backend-API-Module
+│   ├── index.js        # Express-Routen
+│   ├── dataStore.js    # Datenbankoperationen
+│   ├── dbConnect.js    # Datenbankverbindung
+│   ├── mockDatabase.js # In-Memory Mock-Datenbank
+│   └── renderEmail.js  # E-Mail-Template Rendering
 │
-└───public  # the frontend. Static sites served without processing
-    │   index.html  # start page
-    │   main.js
-    │   style.css  # one style file used everywhere
+└── public/             # Statische Frontend-Dateien
+    ├── index.html      # Startseite
+    ├── style.css       # Globale Styles
     │
-    ├───assets
-    │       logo.png
+    ├── assets/         # Bilder und Assets
+    │   └── logo.png    # Logo der Anwendung
     │
-    └───form  # Anmeldung zur Abschlussarbeit
-        │   confirm.html
-        │   confirm.js
-        │   index.html
-        │   main.js
+    └── form/           # Anmeldung zur Abschlussarbeit
+        ├── index.html      # Formularseite
+        ├── main.js         # Formular-Logik
+        ├── confirm.html    # Bestätigungsseite
+        ├── confirm.js      # Logik für Bestätigungsseite
+        └── datenschutzerklaertung/
+            └── index.html  # Datenschutzerklärung
 ```
