@@ -1,6 +1,11 @@
 # verwalt-it
 Webanwendung zum Bereitstellen von Formularen und Workflows für Verwaltungen.
-Der jeweils aktuelle Entwicklungsstand ist hier erreichbar: https://verwalt-it-6e1f6e3175e9.herokuapp.com/
+Die Anwendung wird gehosted auf:
+
+https://www.verwalt-it.de
+
+Der jeweils aktuelle Entwicklungsstand ist hier erreichbar:
+https://verwalt-it-test-25038b6e55cc.herokuapp.com
 
 
 Die Anwendung ist noch nicht produktiv im Einsatz.
