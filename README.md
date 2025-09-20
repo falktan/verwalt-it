@@ -14,8 +14,12 @@ Aktuell ermöglicht die Anwendung die Anmeldung zur Abschlussarbeit. Nutzer kön
 
 ## Entwicklung
 
-### Installieren der Abhängigkeiten
+### Umgebung konfigurieren
+```
+cp .env.example .env
+```
 
+### Installieren der Abhängigkeiten
 ```
 npm install
 ```
@@ -25,9 +29,32 @@ npm install
 npm start
 ```
 
+### Verifikation
+Die Anwendung steht dann im Browser unter
+```
+http://localhost:3000
+```
+zur Verfügung.
+
+
+Health-Check testen:
+```
+curl http://localhost:3000/api/health
+```
+Erwartete Antwort: `{"status": "ok", "timestamp": "..."}`
+
+
 ### MongoDB Varianten
-Die App ist in der .env so konfiguriert, das für die MongoDB ein einfacher Mock verwendet wird.
-Um einer echten MongoDB näher zu kommen kann auch eine in-memory MongoDB installiert werden:
+Im normalen betrieb wird eine MongoDB verwendet. Dafür muss sie über die Umgebung konfiguriert werden
+indem der Wert `MONGODB_URL` gesetzt wird.
+
+Um die Anwendung leichter testen zu können, kann auch eine einfache Mock-Datenbank, welche direkt
+im Speicher der Anwendung liegt konfiguriert werden: `USE_MOCK_DB=true`.
+Das ist der empfohlene Weg für Entwicklung an der Anwendung.
+
+Eine weitere Variante ist es eine volle MongoDB, die im Speicher liegt zu starten. Das erlaubt
+es insbesondere sicherzustellen, dass verwendete Funktionen sich mit einer echten MongoDB
+gleich verhalten werden. Dafür muss die in-memory MongoDB installiert werden:
 ```
 npm install mongodb-memory-server@10.2.0
 ```
@@ -37,7 +64,14 @@ USE_IN_MEMORY_DB=true
 USE_MOCK_DB=false
 ```
 Das Packet ist nicht in den normalen- oder dev-dependencies, damit das repo einfach und schnell mit
-dem üblichen `npm install` Komando installiert werden kann. Das ist insbesondere für Copilot in der Github Umgebung relevant, weil dort die Installation wegen Netzwerkeinschränkungen fehlschlägt.
+dem üblichen `npm install` Komando installiert werden kann, ohne diese etwas schwergewichtige
+Abhängigkeit.
+
+## Wichtige API-Endpunkte
+
+- `GET /api/health` – Statusabfrage
+- `POST /api/submit-form` – Formular absenden
+- `POST /api/get-form-data` – Formulardaten per Token abrufen
 
 ## Verzeichnisstuktur
 

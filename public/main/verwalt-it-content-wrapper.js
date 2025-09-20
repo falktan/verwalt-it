@@ -23,8 +23,8 @@
                         </a>
                         <br/> <br/>
                         <a style="margin: 1em;" href="/">Startseite</a>
-                        <a style="margin: 1em;" href="/impressum.html">Impressum</a>
-                        <a style="margin: 1em;" href="/datenschutzerklaerung.html">Datenschutz</a>
+                        <a style="margin: 1em;" href="/impressum">Impressum</a>
+                        <a style="margin: 1em;" href="/datenschutzerklaerung">Datenschutz</a>
                     </div>
                     <div class="main-content" id="main-content">
                         <slot></slot>
