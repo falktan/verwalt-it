@@ -18,13 +18,15 @@
                         <a href="/">
                             <slot name="logo">
                                 <!-- Default logo if none is provided via slot -->
-                                <img class="logo" src="assets/logo.png" alt="Logo">
+                                <img class="logo" src="assets/logo.svg" alt="Logo">
                             </slot>
                         </a>
-                        <br/> <br/>
-                        <a style="margin: 1em;" href="/">Startseite</a>
-                        <a style="margin: 1em;" href="/impressum">Impressum</a>
-                        <a style="margin: 1em;" href="/datenschutzerklaerung">Datenschutz</a>
+                        <br/>
+                        <div class="nav-links">
+                            <a style="margin: 1em;" href="/">Startseite</a>
+                            <a style="margin: 1em;" href="/impressum">Impressum</a>
+                            <a style="margin: 1em;" href="/datenschutzerklaerung">Datenschutz</a>
+                        </div>
                     </div>
                     <div class="main-content" id="main-content">
                         <slot></slot>
