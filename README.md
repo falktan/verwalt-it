@@ -5,7 +5,7 @@ Der jeweils aktuelle Entwicklungsstand ist hier erreichbar: https://verwalt-it-6
 
 Die Anwendung ist noch nicht produktiv im Einsatz.
 
-## Umgesetzter Usecase: Anmeldung zur Abschlussarbeit
+## Erster Usecase: Anmeldung zur Abschlussarbeit
 
 Aktuell ermöglicht die Anwendung die Anmeldung zur Abschlussarbeit. Nutzer können sich über ein Formular registrieren und ihre relevanten Daten eingeben. Die Anwendung speichert diese. Dem angegebenen Betreuer wird eine Email gesendet, welche einen Link enthält, welche es erlaubt das Formular einzusehen und zu bestätigen.
 
