@@ -22,9 +22,11 @@
                             </slot>
                         </a>
                         <br/>
-                        <a style="margin: 1em;" href="/">Startseite</a>
-                        <a style="margin: 1em;" href="/impressum">Impressum</a>
-                        <a style="margin: 1em;" href="/datenschutzerklaerung">Datenschutz</a>
+                        <div class="nav-links">
+                            <a style="margin: 1em;" href="/">Startseite</a>
+                            <a style="margin: 1em;" href="/impressum">Impressum</a>
+                            <a style="margin: 1em;" href="/datenschutzerklaerung">Datenschutz</a>
+                        </div>
                     </div>
                     <div class="main-content" id="main-content">
                         <slot></slot>
