@@ -21,18 +21,18 @@
                                 <img class="logo" src="assets/logo.svg" alt="Logo">
                             </slot>
                         </a>
-                        <br/>
-                        <div class="nav-links">
-                            <a style="margin: 1em;" href="/">Startseite</a>
-                            <a style="margin: 1em;" href="/impressum">Impressum</a>
-                            <a style="margin: 1em;" href="/datenschutzerklaerung">Datenschutz</a>
-                        </div>
+					<br/>
                     </div>
                     <div class="main-content" id="main-content">
                         <slot></slot>
                     </div>
-                    <div class="footer" id="footer">
-                    </div>
+					<div class="footer" id="footer">
+						<div class="nav-links">
+							<a href="/">Startseite</a>
+							<a href="/impressum">Impressum</a>
+							<a href="/datenschutzerklaerung">Datenschutz</a>
+						</div>
+					</div>
                 </div>
             `;
         }
