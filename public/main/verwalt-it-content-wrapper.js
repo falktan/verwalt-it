@@ -28,9 +28,11 @@
                     </div>
 					<div class="footer" id="footer">
 						<div class="nav-links">
-							<a href="/">Startseite</a>
-							<a href="/impressum">Impressum</a>
-							<a href="/datenschutzerklaerung">Datenschutz</a>
+                            <a href="/">Startseite</a>
+                            <a href="/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit">FH Schmalkalden</a>
+                                <a href="/impressum">Impressum</a>
+                                <a href="/datenschutzerklaerung">Datenschutz</a>
+                            <a href="https://github.com/falktan/verwalt-it">Verwalt-It auf GitHub</a>
 						</div>
 					</div>
                 </div>
