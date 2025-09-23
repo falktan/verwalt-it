@@ -10,7 +10,6 @@
 
         render() {
             return `
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@latest/css/pico.classless.min.css">
                 <link rel="stylesheet" href="/style.css">
 
                 <div class="content-wrapper" id="content-wrapper">
@@ -21,18 +20,23 @@
                                 <img class="logo" src="assets/logo.svg" alt="Logo">
                             </slot>
                         </a>
-                        <br/>
-                        <div class="nav-links">
-                            <a style="margin: 1em;" href="/">Startseite</a>
-                            <a style="margin: 1em;" href="/impressum">Impressum</a>
-                            <a style="margin: 1em;" href="/datenschutzerklaerung">Datenschutz</a>
-                        </div>
+					<br/>
                     </div>
+
                     <div class="main-content" id="main-content">
                         <slot></slot>
                     </div>
+                    <hr/>
+
                     <div class="footer" id="footer">
-                    </div>
+						<div class="nav-links">
+                            <a href="/">Startseite</a>
+                            <a href="/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit">FH Schmalkalden</a>
+                            <a href="/impressum">Impressum</a>
+                            <a href="/datenschutzerklaerung">Datenschutz</a>
+                            <a href="https://github.com/falktan/verwalt-it" target="_blank">Verwalt-It auf GitHub</a>
+						</div>
+					</div>
                 </div>
             `;
         }
