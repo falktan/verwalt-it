@@ -1,7 +1,7 @@
 import express from 'express';
-import renderEmail from './renderEmail.js';
-import { saveSubmission, getSubmissionById } from './dataStore.js';
-import { sendMail } from './email.js';
+import renderEmail from './emailRenderService.js';
+import { saveSubmission, getSubmissionById } from './dataStore/dataStoreService.js';
+import { sendMail } from './sendMailService.js';
 
 
 const router = express.Router();
@@ -14,8 +14,8 @@ router.get('/health', function(req, res, next) {
 router.post('/submit-form', async function(req, res, next) {
   const formData = req.body;
 
-  const id = await saveSubmission(formData);
-  const {email, subject, body} = renderEmail({formData, token: id});
+  const token = await saveSubmission(formData);
+  const {email, subject, body} = renderEmail({formData, token});
 
   await sendMail(email, subject, body);
 

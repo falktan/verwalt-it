@@ -11,7 +11,7 @@ Das erste Verfahren ist die Batchelor-Arbeit. Hier gibt es folgende Schritte:
 Siehe: 
 https://verwalt-it.de/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit
 
-Der Antrag wird von Studenten ausgefüllt. Danach wird eine Email an die im Antrag eingetragenen Referenten generiert. Die Email enthält jeweils einen Link zum Formular zusammen mit einem Token. Damit erreichen die Referenten eine Seite, die es ihnen erlaubt dem Antrag zuzustimmen. Parallel dazu wird eine Email ans Prüfungsamt generiert. Das Prüfungsamt trägt die Informationen über Immatrikulationsstatus und offene Prüfungen ein.
+Der Antrag wird von Studenten ausgefüllt. Danach werden Emails an die im Antrag eingetragenen Referenten generiert. Die Emails enthalten jeweils einen Link zum Formular zusammen mit einem Token. Damit erreichen die Referenten eine Seite, die es ihnen erlaubt dem Antrag zuzustimmen. Parallel dazu wird eine Email ans Prüfungsamt generiert. Das Prüfungsamt trägt die Informationen über Immatrikulationsstatus und offene Prüfungen ein.
 
 Sind alle Bestätigungen und die Meldung von Prüfungsamt eingegangen, wir eine Email an den Prüfungsausschuss generiert. Dieser kann die Referenten bestätigen und Ausgabe- und Abgabedatum festlegen.
 
