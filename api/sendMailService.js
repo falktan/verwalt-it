@@ -2,7 +2,7 @@ import 'dotenv/config';
 import nodemailer from 'nodemailer';
 
 
-export async function sendMail(to, subject, body) {
+export async function sendMail({to, subject, body}) {
     const transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: process.env.SMTP_PORT,

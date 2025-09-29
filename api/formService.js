@@ -1,6 +1,7 @@
 import { storeNewSubmission, confirmSubmission, updateSubmission, getSubmission } from './dataStore/dataStoreService.js';
 import { decodeAccessToken, createSecret, encryptData } from './utils/token.js';
 import { renderEmailsNewSubmission } from './emailRenderService.js';
+import { sendMail } from './sendMailService.js';
 
 
 export async function fetchSubmission({accessToken}) {
@@ -29,7 +30,7 @@ export async function handleUpdate({formData, accessToken}) {
 }
 
 async function sendEmailsNewSubmission({formData, secrets}) {
-    await Promise.all(renderEmailsNewSubmission({formData, secrets}).map(email => sendEmail(email)));
+    await Promise.all(renderEmailsNewSubmission({formData, secrets}).map(email => sendMail(email)));
 }
 
 function createSecrets() {
