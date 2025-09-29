@@ -1,0 +1,19 @@
+# Cursor Rules for verwalt-it
+
+## Powershell usage
+- you have a powershell. Use syntax accordingly.
+
+## Project Overview
+Node.js application with API services, form handling, and email functionality.
+
+## Key Guidelines
+- make small changes at a time
+
+## File Structure
+- `/api/` - Backend services and utilities
+- `/public/` - Frontend files and forms
+- `/tests/` - Jest test files
+
+## Testing
+- Follow existing test patterns in `/tests/`
+- when creating new tests read `docs/technical_documentation/jest.md` first
