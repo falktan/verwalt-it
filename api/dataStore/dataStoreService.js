@@ -1,4 +1,4 @@
-import database from '../dbConnect.js';
+import database from './dbConnect.js';
 import { decodeAccessToken, decryptData } from '../utils/token.js';
 
 
@@ -39,4 +39,19 @@ export async function updateSubmission({submissionId, encryptedFormData}) {
   document.encryptedFormData = encryptedFormData;
 
   await database.collection(mandant).updateOne({ _id: submissionId }, { $set: document });
+}
+
+export async function saveSubmission(formData) {
+  // For testing purposes, generate a simple token
+  const token = `test-token-${Date.now()}`;
+  await storeNewSubmission({ submissionId: token, encryptedFormData: JSON.stringify(formData) });
+  return token;
+}
+
+export async function getSubmissionById(token) {
+  const document = await database.collection(mandant).findOne({ _id: token });
+  if (!document) {
+    return null;
+  }
+  return JSON.parse(document.encryptedFormData);
 }

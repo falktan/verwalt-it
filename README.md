@@ -17,7 +17,10 @@ Aktuell ermöglicht die Anwendung die Anmeldung zur Abschlussarbeit. Nutzer kön
 ![Antrag auf Ausgabe der Bachelorarbeit](docs/hochschule_schmalkalden/antrag_auf_ausgabe_der_batchelorarbeit.png)
 
 ## Tools
-* npm, express, dotenv, mongoDB
+* npm, express, dotenv, mongoDB, jest
+
+## Dokumentation
+- [Technische Dokumentation](docs/technical_documentation/) - Konfiguration und Best Practices
 
 ## Entwicklung
 

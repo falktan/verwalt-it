@@ -2,6 +2,8 @@ import http from 'http';
 import createApp from '../createApp.js';
 
 
+process.env.USE_MOCK_DB = 'true';
+
 describe('Health Endpoint', () => {
   let server;
   let port;
