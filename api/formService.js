@@ -6,7 +6,7 @@ import { sendMail } from './sendMailService.js';
 
 export async function fetchSubmission({accessToken}) {
     const {userRole} = decodeAccessToken(accessToken);
-    return {...getSubmission(accessToken), userRole};
+    return {...await getSubmission(accessToken), userRole};
 }
 
 export async function handleCreate({formData}) {

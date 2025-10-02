@@ -1,5 +1,5 @@
 import { jest } from '@jest/globals';
-import 'dotenv/config';
+
 
 // Import the functions to test
 const { encryptData, decryptData, createAccessToken, decodeAccessToken, createSecret } = await import('../api/utils/token.js');

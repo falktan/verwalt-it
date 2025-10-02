@@ -17,7 +17,7 @@
                         <a href="/">
                             <slot name="logo">
                                 <!-- Default logo if none is provided via slot -->
-                                <img class="logo" src="assets/logo.svg" alt="Logo">
+                                <img class="logo" src="/assets/logo.svg" alt="Logo">
                             </slot>
                         </a>
 					<br/>

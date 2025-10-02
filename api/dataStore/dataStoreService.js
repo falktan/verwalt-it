@@ -18,6 +18,10 @@ export async function getSubmission(accessToken) {
   const {submissionId, formEncryptionSecret} = decodeAccessToken(accessToken);
   const document = await database.collection(mandant).findOne({ _id: submissionId });
 
+  if (!document) {
+    throw new Error('Submission not found', submissionId);
+  }
+
   return {
     formData: decryptData(document.encryptedFormData, formEncryptionSecret),
     confirmations: document.confirmations,

@@ -1,5 +1,5 @@
 import { jest } from '@jest/globals';
-import 'dotenv/config';
+
 
 // Mock the token utility to return deterministic values
 jest.unstable_mockModule('../api/utils/token.js', () => ({

@@ -3,6 +3,12 @@ import nodemailer from 'nodemailer';
 
 
 export async function sendMail({to, subject, body}) {
+    if (process.env.DISABLE_EMAIL === 'true') {
+        console.log('Email sending disabled. Would have sent');
+        console.log({to, subject, body});
+        return;
+    }
+
     const transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: process.env.SMTP_PORT,

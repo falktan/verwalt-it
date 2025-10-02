@@ -111,3 +111,16 @@ Abhängigkeit.
         └── datenschutzerklaertung/
             └── index.html  # Datenschutzerklärung
 ```
+
+## Testing
+Um das formular schnell ausfüllen zu können kann man folgendes Bookmarklet (einfach als Bookmark setzten und dann auf der Seite anwählen) nutzen:
+
+```
+javascript: (function(){
+    const emailTo = "falk.tandetzky@gmail.com";
+    document.getElementById("email").value = emailTo;
+    document.getElementById("betreuer_betrieblich_email").value = emailTo;
+    document.getElementById("hochschulbetreuer_email").value = emailTo;
+    document.getElementById("korreferent_email").value = emailTo;
+})();
+```

@@ -19,7 +19,7 @@ function renderEmailNewSubmissionStudent({formData, secrets}){
 Sehr geehrte Frau/Herr ${formData.vorname} ${formData.nachname},
 Vielen Dank für die Anmeldung der Abschlussarbeit.
 Über folgenden Link können Sie den Status der Anmeldung verfolgen:
-${process.env.BASE_URL}/form/confirm?token=${accessToken}
+${process.env.BASE_URL}/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit/formular?userRole=student&token=${accessToken}
 `;
 
 	return {email_to: [formData.email], subject, body};
@@ -40,7 +40,7 @@ Sehr geehrte Damen und Herren,
 von ${formData.vorname} ${formData.nachname} wurde soeben das Formular zur Anmeldung der Abschlussarbeit ausgefüllt.
 ${infoSentence[userRole]}
 Bitte bestätigen Sie über folgenden Link die Anmeldung der Abschlussarbeit:
-${process.env.BASE_URL}/form/confirm?token=${accessToken}
+${process.env.BASE_URL}/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit/formular?userRole=${userRole}&token=${accessToken}
 `;
 
 	return {email_to, subject, body};
@@ -54,7 +54,7 @@ function renderEmailNewSubmissionPruefungsamt({formData, secrets}){
 Liebes Prüfungsamt,
 von ${formData.vorname} ${formData.nachname} wurde soeben das Formular zur Anmeldung der Abschlussarbeit ausgefüllt.
 Bitte bearbeiten Sie die Anfrage über folgenden Link:
-${process.env.BASE_URL}/form/confirm?token=${accessToken}
+${process.env.BASE_URL}/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit/formular?userRole=pruefungsamt&token=${accessToken}
 `;
 
 	return {email_to, subject, body};

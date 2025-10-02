@@ -1,7 +1,5 @@
 import express from 'express';
-import renderEmail from './emailRenderService.js';
-import { saveSubmission, getSubmissionById } from './dataStore/dataStoreService.js';
-import { sendMail } from './sendMailService.js';
+import { fetchSubmission, handleCreate, handleConfirm, handleUpdate } from './formService.js';
 
 
 const router = express.Router();
@@ -11,22 +9,29 @@ router.get('/health', function(req, res, next) {
   res.json(result);
 });
 
-router.post('/submit-form', async function(req, res, next) {
-  const formData = req.body;
-
-  const token = await saveSubmission(formData);
-  const {email, subject, body} = renderEmail({formData, token});
-
-  await sendMail(email, subject, body);
-
-  res.json({ message: 'Anmeldung erfolgreich abgesendet', email: { email, subject, body } });
+router.post('/create-submission', async function(req, res, next) {
+  const { formData } = req.body;
+  await handleCreate({formData});
+  res.json({ message: 'Submission created successfully' });
 });
 
-router.post('/get-form-data', async function(req, res, next) {
-  const { token } = req.body;
-
-  const formData = await getSubmissionById(token);
-  res.json(formData);
+router.post('/fetch-submission', async function(req, res, next) {
+  const { accessToken } = req.body;
+  const submissionData = await fetchSubmission({accessToken});
+  res.json(submissionData);
 });
+
+router.post('/confirm-submission', async function(req, res, next) {
+  const { accessToken } = req.body;
+  await handleConfirm({accessToken});
+  res.json({ message: 'Submission confirmed successfully' });
+});
+
+router.post('/update-submission', async function(req, res, next) {
+  const { formData, accessToken } = req.body;
+  await handleUpdate({formData, accessToken});
+  res.json({ message: 'Submission updated successfully' });
+});
+
 
 export default router;
