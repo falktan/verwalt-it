@@ -117,7 +117,7 @@ Um das formular schnell ausfüllen zu können kann man folgendes Bookmarklet (ei
 
 ```
 javascript: (function(){
-    const emailTo = "falk.tandetzky@gmail.com";
+    const emailTo = "user@example.com";
     document.getElementById("email").value = emailTo;
     document.getElementById("betreuer_betrieblich_email").value = emailTo;
     document.getElementById("hochschulbetreuer_email").value = emailTo;
