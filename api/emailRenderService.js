@@ -56,3 +56,16 @@ ${process.env.BASE_URL}/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgab
 
 	return {email_to, subject, body};
 }
+
+export function renderEmailAllConfirmationsComplete({formData, secrets}){
+	const accessToken = createAccessToken({submissionId: secrets.submissionId, formEncryptionSecret: secrets.formEncryptionSecret, userRole: 'pruefungsausschuss'})
+	const email_to = [process.env.EMAIL_PRUEFUNGSAUSSCHUSS_TO]
+	const subject = `Alle Bestätigungen eingegangen - Abschlussarbeit`
+	const body = `
+Lieber Prüfungsausschuss,
+alle Bestätigungen für die Abschlussarbeit von ${formData.vorname} ${formData.nachname} sind eingegangen.
+Bitte bearbeiten Sie die Anfrage über folgenden Link:
+${process.env.BASE_URL}/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit/formular?token=${accessToken}`;
+
+	return {email_to, subject, body};
+}

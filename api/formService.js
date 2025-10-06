@@ -1,6 +1,6 @@
 import { storeNewSubmission, confirmSubmission, updateSubmission, getSubmission, updateConfirmations } from './dataStore/dataStoreService.js';
 import { decodeAccessToken, createSecret, encryptData } from './utils/token.js';
-import { renderEmailsNewSubmission } from './emailRenderService.js';
+import { renderEmailsNewSubmission, renderEmailAllConfirmationsComplete } from './emailRenderService.js';
 import { sendMail } from './sendMailService.js';
 
 
@@ -56,11 +56,22 @@ async function checkAndHandleCompletion(accessToken) {
     const allConfirmed = requiredConfirmations.every(role => confirmations[role] === true);
 
     if (allConfirmed) {
-        await handleAllConfirmationsComplete(submission);
+        await handleAllConfirmationsComplete(accessToken);
     }
 }
 
-async function handleAllConfirmationsComplete(submission) {
+async function handleAllConfirmationsComplete(accessToken) {
     console.log(`Alle Bestätigungen sind eingegangen`);
+    
+    const submission = await getSubmission(accessToken);
+    const {submissionId, formEncryptionSecret} = decodeAccessToken(accessToken);
+    
+    const secrets = {
+        submissionId,
+        formEncryptionSecret
+    };
+    
+    const email = renderEmailAllConfirmationsComplete({formData: submission.formData, secrets});
+    await sendMail(email);
 }
   
