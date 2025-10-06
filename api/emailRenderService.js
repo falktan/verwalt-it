@@ -71,7 +71,7 @@ ${process.env.BASE_URL}/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgab
 }
 
 export function renderEmailPruefungsausschussApproval({formData, secrets}){
-	const email_to = process.env.EMAIL_APPROVAL_RECIPIENTS ? process.env.EMAIL_APPROVAL_RECIPIENTS.split(',') : []
+	const email_to = process.env.EMAIL_FINAL_APPROVAL_RECIPIENTS.split(',');
 	const subject = `Antrag auf Bachelorarbeit genehmigt - ${formData.vorname} ${formData.nachname}`
 	const body = `
 Sehr geehrte Damen und Herren,
