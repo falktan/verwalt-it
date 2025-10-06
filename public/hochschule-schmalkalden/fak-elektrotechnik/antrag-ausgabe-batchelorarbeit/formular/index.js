@@ -109,6 +109,8 @@ async function handleFormSubmit(event) {
     await handleUpdateSubmission(event, token);
   } else if(['betreuer_betrieblich', 'betreuer_hochschule', 'betreuer_korreferent'].includes(userRole)) {
     await handleConfirmSubmission(token);
+  } else if(userRole === 'pruefungsausschuss') {
+    await handleApproveSubmission(token);
   }
 }
 
@@ -143,6 +145,14 @@ async function handleUpdateSubmission(event, token) {
 
 async function handleConfirmSubmission(token) {
   const response = await fetch('/api/confirm-submission', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({accessToken: token})
+  });
+}
+
+async function handleApproveSubmission(token) {
+  const response = await fetch('/api/approve-submission', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({accessToken: token})

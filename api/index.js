@@ -1,5 +1,5 @@
 import express from 'express';
-import { fetchSubmission, handleCreate, handleConfirm, handleUpdate, handleUpdateConfirmations } from './formService.js';
+import { fetchSubmission, handleCreate, handleConfirm, handleUpdate, handleUpdateConfirmations, handlePruefungsausschussApproval } from './formService.js';
 import { requireAccessToken, requireRole } from './utils/permissionHelper.js';
 
 
@@ -42,6 +42,12 @@ router.post('/update-confirmations', requireRole(['pruefungsamt']), async functi
   const { confirmations, accessToken } = req.body;
   await handleUpdateConfirmations({confirmations, accessToken});
   res.json({ message: 'Confirmations updated successfully' });
+});
+
+router.post('/approve-submission', requireRole(['pruefungsausschuss']), async function(req, res, next) {
+  const { accessToken } = req.body;
+  await handlePruefungsausschussApproval({accessToken});
+  res.json({ message: 'Submission approved and notification emails sent successfully' });
 });
 
 

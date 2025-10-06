@@ -1,6 +1,6 @@
 import { storeNewSubmission, confirmSubmission, updateSubmission, getSubmission, updateConfirmations } from './dataStore/dataStoreService.js';
 import { decodeAccessToken, createSecret, encryptData } from './utils/token.js';
-import { renderEmailsNewSubmission, renderEmailAllConfirmationsComplete } from './emailRenderService.js';
+import { renderEmailsNewSubmission, renderEmailAllConfirmationsComplete, renderEmailPruefungsausschussApproval } from './emailRenderService.js';
 import { sendMail } from './sendMailService.js';
 
 
@@ -36,8 +36,25 @@ export async function handleUpdateConfirmations({confirmations, accessToken}) {
     await checkAndHandleCompletion(accessToken);
 }
 
+export async function handlePruefungsausschussApproval({accessToken}) {
+    const {submissionId, formEncryptionSecret} = decodeAccessToken(accessToken);
+    const submission = await getSubmission(accessToken);
+    
+    const secrets = {
+        submissionId,
+        formEncryptionSecret
+    };
+    
+    await sendEmailPruefungsausschussApproval({formData: submission.formData, secrets});
+}
+
 async function sendEmailsNewSubmission({formData, secrets}) {
     await Promise.all(renderEmailsNewSubmission({formData, secrets}).map(email => sendMail(email)));
+}
+
+async function sendEmailPruefungsausschussApproval({formData, secrets}) {
+    const email = renderEmailPruefungsausschussApproval({formData, secrets});
+    await sendMail(email);
 }
 
 function createSecrets() {

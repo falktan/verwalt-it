@@ -69,3 +69,30 @@ ${process.env.BASE_URL}/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgab
 
 	return {email_to, subject, body};
 }
+
+export function renderEmailPruefungsausschussApproval({formData, secrets}){
+	const email_to = process.env.EMAIL_APPROVAL_RECIPIENTS ? process.env.EMAIL_APPROVAL_RECIPIENTS.split(',') : []
+	const subject = `Antrag auf Bachelorarbeit genehmigt - ${formData.vorname} ${formData.nachname}`
+	const body = `
+Sehr geehrte Damen und Herren,
+
+der Antrag auf Ausgabe einer Bachelorarbeit wurde erfolgreich genehmigt.
+
+Antragsteller:
+- Name: ${formData.vorname} ${formData.nachname}
+- Matrikelnummer: ${formData.matrikelnummer}
+- Studiengang: ${formData.studiengang}
+- Thema: ${formData.thema}
+
+Betreuer:
+- Betrieblicher Betreuer: ${formData.betreuer_betrieblich_name} (${formData.betreuer_betrieblich_email})
+- Hochschulbetreuer: ${formData.hochschulbetreuer_name} (${formData.hochschulbetreuer_email})
+- Korreferent: ${formData.korreferent_name} (${formData.korreferent_email})
+
+Der Antrag wurde vom Prüfungsausschuss genehmigt und kann nun bearbeitet werden.
+
+Mit freundlichen Grüßen
+Verwalt-IT.de`;
+
+	return {to: email_to, subject, body};
+}
