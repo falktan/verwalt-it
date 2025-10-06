@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if(!token) {
     // Student öffnet die Seite als leeres Formular.
+    showRoleInfo('student-initial');
     return;
   }
 
@@ -35,6 +36,9 @@ function populateForm(formData) {
 function updateForm() {
   const {userRole} = submissionData;
   const submitButton = document.querySelector('#submit-button');
+
+  // Zeige rollenspezifische Info-Box an
+  showRoleInfo(userRole);
 
   if(userRole === 'student') {
     submitButton.style.display = 'none';
@@ -86,6 +90,12 @@ function disableForm() {
   });
 }
 
+function showRoleInfo(userRole) {
+  const roleInfoElement = document.querySelector(`#role-info-${userRole}`);
+  if (roleInfoElement) {
+    roleInfoElement.style.display = 'block';
+  }
+}
 
 async function handleFormSubmit(event) {
   event.preventDefault();

@@ -7,8 +7,7 @@ exports[`Email Render Service should render all emails correctly 1`] = `
 Sehr geehrte Frau/Herr Max Mustermann,
 Vielen Dank für die Anmeldung der Abschlussarbeit.
 Über folgenden Link können Sie den Status der Anmeldung verfolgen:
-https://test.example.com/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit/formular?token=test-access-token
-",
+https://test.example.com/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit/formular?token=test-access-token",
     "email_to": [
       "max.mustermann@example.com",
     ],
@@ -19,8 +18,7 @@ https://test.example.com/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausga
 Liebes Prüfungsamt,
 von Max Mustermann wurde soeben das Formular zur Anmeldung der Abschlussarbeit ausgefüllt.
 Bitte bearbeiten Sie die Anfrage über folgenden Link:
-https://test.example.com/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit/formular?token=test-access-token
-",
+https://test.example.com/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit/formular?token=test-access-token",
     "email_to": [
       "pruefungsamt@example.com",
     ],
@@ -32,8 +30,7 @@ Sehr geehrte Damen und Herren,
 von Max Mustermann wurde soeben das Formular zur Anmeldung der Abschlussarbeit ausgefüllt.
 Sie wurden als betrieblicher Betreuer angegeben.
 Bitte bestätigen Sie über folgenden Link die Anmeldung der Abschlussarbeit:
-https://test.example.com/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit/formular?token=test-access-token
-",
+https://test.example.com/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit/formular?token=test-access-token",
     "email_to": [
       "betreuer.betrieblich@example.com",
     ],
@@ -45,8 +42,7 @@ Sehr geehrte Damen und Herren,
 von Max Mustermann wurde soeben das Formular zur Anmeldung der Abschlussarbeit ausgefüllt.
 Sie wurden als Hochschulbetreuer angegeben.
 Bitte bestätigen Sie über folgenden Link die Anmeldung der Abschlussarbeit:
-https://test.example.com/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit/formular?token=test-access-token
-",
+https://test.example.com/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit/formular?token=test-access-token",
     "email_to": [
       "betreuer.hochschule@example.com",
     ],
@@ -58,8 +54,7 @@ Sehr geehrte Damen und Herren,
 von Max Mustermann wurde soeben das Formular zur Anmeldung der Abschlussarbeit ausgefüllt.
 Sie wurden als Korreferent angegeben.
 Bitte bestätigen Sie über folgenden Link die Anmeldung der Abschlussarbeit:
-https://test.example.com/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit/formular?token=test-access-token
-",
+https://test.example.com/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit/formular?token=test-access-token",
     "email_to": [
       "betreuer.korreferent@example.com",
     ],
