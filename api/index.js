@@ -1,5 +1,5 @@
 import express from 'express';
-import { fetchSubmission, handleCreate, handleConfirm, handleUpdate } from './formService.js';
+import { fetchSubmission, handleCreate, handleConfirm, handleUpdate, handleUpdateConfirmations } from './formService.js';
 
 
 const router = express.Router();
@@ -31,6 +31,12 @@ router.post('/update-submission', async function(req, res, next) {
   const { formData, accessToken } = req.body;
   await handleUpdate({formData, accessToken});
   res.json({ message: 'Submission updated successfully' });
+});
+
+router.post('/update-confirmations', async function(req, res, next) {
+  const { confirmations, accessToken } = req.body;
+  await handleUpdateConfirmations({confirmations, accessToken});
+  res.json({ message: 'Confirmations updated successfully' });
 });
 
 

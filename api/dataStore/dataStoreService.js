@@ -45,6 +45,22 @@ export async function updateSubmission({submissionId, encryptedFormData}) {
   await database.collection(mandant).updateOne({ _id: submissionId }, { $set: document });
 }
 
+export async function updateConfirmations({submissionId, confirmations}) {
+  const document = await database.collection(mandant).findOne({ _id: submissionId });
+
+  if (!document) {
+    throw new Error('Submission not found', submissionId);
+  }
+
+  // Merge new confirmations with existing ones
+  const updatedConfirmations = { ...document.confirmations, ...confirmations };
+
+  await database.collection(mandant).updateOne(
+    { _id: submissionId }, 
+    { $set: { confirmations: updatedConfirmations } }
+  );
+}
+
 export async function saveSubmission(formData) {
   // For testing purposes, generate a simple token
   const token = `test-token-${Date.now()}`;

@@ -114,11 +114,22 @@ async function handleCreateSubmission(event) {
 }
 
 async function handleUpdateSubmission(event, token) {
-  const response = await fetch('/api/update-submission', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({formData: getFormData(event), accessToken: token})
-  });
+  const formData = getFormData(event);
+  const confirmations = getConfirmationsData(event);
+  
+  // Update both form data and confirmations
+  await Promise.all([
+    fetch('/api/update-submission', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({formData, accessToken: token})
+    }),
+    fetch('/api/update-confirmations', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({confirmations, accessToken: token})
+    })
+  ]);
 }
 
 async function handleConfirmSubmission(token) {
@@ -140,8 +151,32 @@ function getFormData(event) {
   return data;
 }
 
+function getConfirmationsData(event) {
+  const formData = [...(new FormData(event.target))];
+  const confirmations = {};
+  
+  // Map form field names to confirmation keys
+  const confirmationMapping = {
+    'betreuer_betrieblich_confirmation': 'betreuer_betrieblich',
+    'hochschulbetreuer_confirmation': 'betreuer_hochschule', 
+    'korreferent_confirmation': 'betreuer_korreferent',
+    'pruefungsamt_confirmation': 'pruefungsamt'
+  };
+  
+  formData.forEach(([key, value]) => {
+    if (confirmationMapping[key]) {
+      confirmations[confirmationMapping[key]] = value === 'on';
+    }
+  });
+  
+  return confirmations;
+}
+
 function getAccessToken() {
   const urlParams = new URLSearchParams(window.location.search);
   const token = urlParams.get('token');
   return token;
 }
+
+// Make handleFormSubmit globally available for the HTML form
+window.handleFormSubmit = handleFormSubmit;

@@ -1,4 +1,4 @@
-import { storeNewSubmission, confirmSubmission, updateSubmission, getSubmission } from './dataStore/dataStoreService.js';
+import { storeNewSubmission, confirmSubmission, updateSubmission, getSubmission, updateConfirmations } from './dataStore/dataStoreService.js';
 import { decodeAccessToken, createSecret, encryptData } from './utils/token.js';
 import { renderEmailsNewSubmission } from './emailRenderService.js';
 import { sendMail } from './sendMailService.js';
@@ -27,6 +27,11 @@ export async function handleUpdate({formData, accessToken}) {
     const encryptedFormData = encryptData(formData, formEncryptionSecret);
 
     await updateSubmission({submissionId, encryptedFormData});
+}
+
+export async function handleUpdateConfirmations({confirmations, accessToken}) {
+    const {submissionId} = decodeAccessToken(accessToken);
+    await updateConfirmations({submissionId, confirmations});
 }
 
 async function sendEmailsNewSubmission({formData, secrets}) {
