@@ -19,6 +19,15 @@ export default function getMockDatabase() {
                         return collections[name].data.find(doc => {
                             return Object.keys(query).every(key => doc[key] === query[key]);
                         }) || null;
+                    },
+                    updateOne: async (query, update) => {
+                        const doc = collections[name].data.find(doc => {
+                            return Object.keys(query).every(key => doc[key] === query[key]);
+                        });
+                        if (update.$set) {
+                            Object.assign(doc, update.$set);
+                        }
+                        return doc;
                     }
                 };
             }

@@ -19,7 +19,7 @@ function renderEmailNewSubmissionStudent({formData, secrets}){
 Sehr geehrte Frau/Herr ${formData.vorname} ${formData.nachname},
 Vielen Dank für die Anmeldung der Abschlussarbeit.
 Über folgenden Link können Sie den Status der Anmeldung verfolgen:
-${process.env.BASE_URL}/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit/formular?userRole=student&token=${accessToken}
+${process.env.BASE_URL}/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit/formular?token=${accessToken}
 `;
 
 	return {email_to: [formData.email], subject, body};
@@ -33,14 +33,14 @@ function renderEmailNewSubmissionBetreuer({formData, secrets, role: userRole}){
 		betreuer_korreferent: 'Sie wurden als Korreferent angegeben.',
 	}
 
-	const accessToken = createAccessToken({submissionId: secrets.submissionId, formEncryptionSecret: secrets.formEncryptionSecret, userRole: userRole})
+	const accessToken = createAccessToken({submissionId: secrets.submissionId, formEncryptionSecret: secrets.formEncryptionSecret, userRole})
 	const subject = `Anmeldung der Abschlussarbeit`
 	const body = `
 Sehr geehrte Damen und Herren,
 von ${formData.vorname} ${formData.nachname} wurde soeben das Formular zur Anmeldung der Abschlussarbeit ausgefüllt.
 ${infoSentence[userRole]}
 Bitte bestätigen Sie über folgenden Link die Anmeldung der Abschlussarbeit:
-${process.env.BASE_URL}/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit/formular?userRole=${userRole}&token=${accessToken}
+${process.env.BASE_URL}/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit/formular?token=${accessToken}
 `;
 
 	return {email_to, subject, body};
@@ -54,18 +54,8 @@ function renderEmailNewSubmissionPruefungsamt({formData, secrets}){
 Liebes Prüfungsamt,
 von ${formData.vorname} ${formData.nachname} wurde soeben das Formular zur Anmeldung der Abschlussarbeit ausgefüllt.
 Bitte bearbeiten Sie die Anfrage über folgenden Link:
-${process.env.BASE_URL}/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit/formular?userRole=pruefungsamt&token=${accessToken}
+${process.env.BASE_URL}/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit/formular?token=${accessToken}
 `;
 
 	return {email_to, subject, body};
-}
-
-// Default export for the API
-export default function renderEmail({formData, token}) {
-	// Simple implementation for testing
-	return {
-		email: formData.email || 'test@example.com',
-		subject: 'Test Email Subject',
-		body: 'Test email body content'
-	};
 }

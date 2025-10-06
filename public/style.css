@@ -61,6 +61,13 @@ form.responsive-form .field {
   gap: 6px;
 }
 
+form.responsive-form .field.checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
 form.responsive-form .field.full {
   grid-column: 1 / -1;
 }
@@ -77,9 +84,15 @@ form.responsive-form h4 {
   margin-bottom: 8px;
 }
 
+form.responsive-form input[type="checkbox"] {
+  width: 38px;
+  height: 38px;
+}
+
 form.responsive-form input,
 form.responsive-form select,
-form.responsive-form textarea {
+form.responsive-form textarea,
+form.responsive-form input[type="checkbox"] {
   padding: 8px 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
