@@ -20,6 +20,7 @@ export async function handleConfirm({accessToken}) {
     const {submissionId, userRole} = decodeAccessToken(accessToken);
 
     await confirmSubmission({submissionId, userRole});
+    await checkAndHandleCompletion(accessToken);
 }
 
 export async function handleUpdate({formData, accessToken}) {
@@ -32,6 +33,7 @@ export async function handleUpdate({formData, accessToken}) {
 export async function handleUpdateConfirmations({confirmations, accessToken}) {
     const {submissionId} = decodeAccessToken(accessToken);
     await updateConfirmations({submissionId, confirmations});
+    await checkAndHandleCompletion(accessToken);
 }
 
 async function sendEmailsNewSubmission({formData, secrets}) {
@@ -44,3 +46,21 @@ function createSecrets() {
         submissionId: createSecret()
     }
 }
+
+async function checkAndHandleCompletion(accessToken) {
+    const requiredConfirmations = ['betreuer_betrieblich', 'betreuer_hochschule', 'betreuer_korreferent', 'pruefungsamt'];
+
+    const submission = await getSubmission(accessToken)
+    const confirmations = submission.confirmations;
+
+    const allConfirmed = requiredConfirmations.every(role => confirmations[role] === true);
+
+    if (allConfirmed) {
+        await handleAllConfirmationsComplete(submission);
+    }
+}
+
+async function handleAllConfirmationsComplete(submission) {
+    console.log(`Alle Bestätigungen sind eingegangen`);
+}
+  

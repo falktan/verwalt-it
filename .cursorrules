@@ -16,5 +16,7 @@ Node.js application with API services, form handling, and email functionality.
 - `/tests/` - Jest test files
 
 ## Testing
+- only created tests if explicitly asked to create a test
 - Follow existing test patterns in `/tests/`
 - when creating new tests read `docs/technical_documentation/jest.md` first
+- DO NOT create new tests when adding functionality - you will be explicitly asked to add tests when needed
