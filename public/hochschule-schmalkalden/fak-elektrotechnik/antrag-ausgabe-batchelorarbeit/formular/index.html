@@ -87,6 +87,14 @@
       </div>
     </div>
 
+    <div id="role-info-pruefungsausschuss" class="role-info" style="display: none;">
+      <div class="info-box">
+        <h3>Prüfungsausschuss</h3>
+        <p>Ein Antrag auf Ausgabe einer Bachelorarbeit wurde eingereicht. Die Bestätigungen der Betreuer und des Prüfungsamts sind eingegangen.</p>
+        <p>Bitte prüfen und ergänzen Sie das Formular. Sobald Sie das Formular absenden, wird eine Email an den Studenten, das Prüfungsamt und das Dekanat generiert.</p>
+      </div>
+    </div>
+
     <form class="responsive-form" onsubmit="handleFormSubmit(event)">
 
       <h2>Antragsteller</h2>
@@ -239,6 +247,10 @@
         <input type="checkbox" id="datenschutz_zustimmung" name="datenschutz_zustimmung">
         <label for="datenschutz_zustimmung">Ich stimme der Datenschutzerklärung und den Nutzungsbedingungen zu.</label>
       </div>
+      
+      <!-- Container für Bestätigungsfelder (wird bei Bedarf befüllt) -->
+      <div id="confirmation-container" class="field full"></div>
+      
       <div class="field full">
         <input type="submit" id="submit-button" value="Absenden">
       </div>

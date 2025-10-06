@@ -50,35 +50,34 @@ function updateForm() {
   } else if(['betreuer_betrieblich', 'betreuer_hochschule', 'betreuer_korreferent'].includes(userRole)) {
     submitButton.value = 'Bestätigen';
     disableForm();
+  } else if(userRole === 'pruefungsausschuss') {
+    submitButton.value = 'Antrag genehmigen';
+    addConfirmationFields();
   }
 }
 
 function addConfirmationFields() {
   const {confirmations} = submissionData;
-  const form = document.querySelector('form');
-  const confirmationFields = document.createElement('div');
-  confirmationFields.classList.add('field', 'full');
-  confirmationFields.innerHTML = `
+  const confirmationContainer = document.querySelector('#confirmation-container');
+  confirmationContainer.innerHTML = `
     <h2>Bestätigungen</h2>
     <div class="field full checkbox">
       <input type="checkbox" id="betreuer_betrieblich_confirmation" name="betreuer_betrieblich_confirmation" ${confirmations.betreuer_betrieblich ? 'checked' : ''}>
-      <label for="confirmation">Bestätigung des betrieblichen Betreuers</label>
+      <label for="betreuer_betrieblich_confirmation">Bestätigung des betrieblichen Betreuers</label>
     </div>
     <div class="field full checkbox">
       <input type="checkbox" id="hochschulbetreuer_confirmation" name="hochschulbetreuer_confirmation" ${confirmations.betreuer_hochschule ? 'checked' : ''}>
-      <label for="confirmation">Bestätigung des Referenten</label>
+      <label for="hochschulbetreuer_confirmation">Bestätigung des Referenten</label>
     </div>
     <div class="field full checkbox">
       <input type="checkbox" id="korreferent_confirmation" name="korreferent_confirmation" ${confirmations.betreuer_korreferent ? 'checked' : ''}>
-      <label for="confirmation">Bestätigung des Korreferenten</label>
+      <label for="korreferent_confirmation">Bestätigung des Korreferenten</label>
     </div>
     <div class="field full checkbox">
       <input type="checkbox" id="pruefungsamt_confirmation" name="pruefungsamt_confirmation" ${confirmations.pruefungsamt ? 'checked' : ''}>
-      <label for="confirmation">Bestätigung des Prüfungsamtes</label>
+      <label for="pruefungsamt_confirmation">Bestätigung des Prüfungsamtes</label>
     </div>
   `;
-
-  form.append(confirmationFields);
 }
 
 function disableForm() {

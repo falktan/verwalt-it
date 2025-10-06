@@ -145,6 +145,39 @@ form.responsive-form textarea {
   resize: vertical;
 }
 
+/* Submit Button Styling */
+form.responsive-form input[type="submit"] {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-height: 48px;
+}
+
+form.responsive-form input[type="submit"]:hover {
+  background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+form.responsive-form input[type="submit"]:active {
+  background: linear-gradient(135deg, #3d8b40 0%, #357a38 100%);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  transform: translateY(0);
+  transition: all 0.1s ease;
+}
+
+form.responsive-form input[type="submit"]:focus {
+  outline: 2px solid #4CAF50;
+  outline-offset: 2px;
+}
+
 /* Small screens: single column */
 @media (max-width: 640px) {
   form.responsive-form {
