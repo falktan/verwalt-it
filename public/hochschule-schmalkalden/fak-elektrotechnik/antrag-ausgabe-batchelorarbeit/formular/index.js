@@ -29,7 +29,15 @@ async function loadSubmission(token) {
 function populateForm(formData) {
   const form = document.querySelector('form');
   Object.entries(formData).forEach(([key, value]) => {
-    form.querySelector(`[name="${key}"]`).value = value;
+    const field = form.querySelector(`[name="${key}"]`);
+    if (!field) return;
+    
+    // Checkbox speziell behandeln
+    if (field.type === 'checkbox') {
+      field.checked = (value === 'on' || value === true);
+    } else {
+      field.value = value;
+    }
   });
 }
 
@@ -125,7 +133,14 @@ async function handleFormSubmit(event) {
     
     showSuccessMessage(userRole);
     submitButton.value = originalButtonText;
-    disableForm();
+    
+    // Formular deaktivieren, aber NICHT für Prüfungsamt
+    if(userRole !== 'pruefungsamt') {
+      disableForm();
+    } else {
+      // Für Prüfungsamt: Button wieder aktivieren
+      submitButton.disabled = false;
+    }
     
   } catch (error) {
     // Bei Fehler: Button wieder aktivieren und Fehlermeldung anzeigen
@@ -139,7 +154,7 @@ async function handleCreateSubmission(event) {
   const response = await fetch('/api/create-submission', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({formData: getFormData(event)})
+    body: JSON.stringify({formData: getFormData()})
   });
 
   if (!response.ok) {
@@ -150,7 +165,7 @@ async function handleCreateSubmission(event) {
 }
 
 async function handleUpdateSubmission(event, token) {
-  const formData = getFormData(event);
+  const formData = getFormData();
   const confirmations = getConfirmationsData(event);
   
   // Update both form data and confirmations
@@ -199,8 +214,9 @@ async function handleApproveSubmission(token) {
   }
 }
 
-function getFormData(event) {
-  const formData = [...(new FormData(event.target))];
+function getFormData() {
+  const form = document.querySelector('form');
+  const formData = [...(new FormData(form))];
   const data = Object.fromEntries(formData.filter(
     ([key]) => ![
       'betreuer_betrieblich_confirmation', 
@@ -210,8 +226,9 @@ function getFormData(event) {
   return data;
 }
 
-function getConfirmationsData(event) {
-  const formData = [...(new FormData(event.target))];
+function getConfirmationsData() {
+  const form = document.querySelector('form');
+  const formData = [...(new FormData(form))];
   const confirmations = {};
   
   // Map form field names to confirmation keys
@@ -244,18 +261,37 @@ function showSuccessMessage(userRole) {
   if (!userRole) {
     message = 'Ihr Antrag wurde erfolgreich eingereicht. Sie erhalten in Kürze eine Bestätigungs-E-Mail mit einem Link zur Statusverfolgung.';
   } else if (userRole === 'pruefungsamt') {
-    message = 'Die Änderungen wurden erfolgreich gespeichert.';
+    message = getPruefungsamtMessage();
   } else if (['betreuer_betrieblich', 'betreuer_hochschule', 'betreuer_korreferent'].includes(userRole)) {
     message = 'Ihre Bestätigung wurde erfolgreich übermittelt. Vielen Dank!';
   } else if (userRole === 'pruefungsausschuss') {
     message = 'Der Antrag wurde erfolgreich genehmigt. Die entsprechenden E-Mails wurden versendet.';
   }
-  
-  messageContainer.innerHTML = `<div class="info-box" style="background-color: #d4edda; border-color: #c3e6cb; color: #155724;"><p>${message}</p></div>`;
+    
+  messageContainer.innerHTML = `<div class="info-box"><p>${message}</p></div>`;
   messageContainer.style.display = 'block';
   
   // Scrolle zur Nachricht
   messageContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function getPruefungsamtMessage() {
+  const confirmations = getConfirmationsData();
+  
+  const requiredConfirmations = ['betreuer_betrieblich', 'betreuer_hochschule', 'betreuer_korreferent', 'pruefungsamt'];
+  const missingConfirmations = requiredConfirmations.some(role => !confirmations[role]);
+  
+  // Prüfungsamt selbst hat nicht bestätigt
+  if (!confirmations.pruefungsamt) {
+    return '<strong>Achtung!</strong> Die Änderungen wurden gespeichert, aber die Bestätigung des Prüfungsamtes wurde nicht gesetzt.' +
+      'Die Bearbeitung wird erst fortgesetzt, sobald auch diese Bestätigung gesetzt wird.';
+  }
+  
+  if (missingConfirmations) {
+    return 'Die Änderungen wurden erfolgreich gespeichert. Es fehlen noch Bestätigungen. '+
+    'Eine E-Mail an den Prüfungsausschuss wird automatisch gesendet, sobald alle Bestätigungen vorliegen.';
+  }
+  return 'Die Änderungen wurden erfolgreich gespeichert. Alle Bestätigungen sind eingegangen. Eine E-Mail wurde an den Prüfungsausschuss gesendet.';
 }
 
 function showErrorMessage(errorMessage) {
