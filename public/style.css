@@ -178,6 +178,17 @@ form.responsive-form input[type="submit"]:focus {
   outline-offset: 2px;
 }
 
+form.responsive-form input[type="submit"]:disabled {
+  background: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+  transition: none;
+  outline: none;
+  outline-offset: 0;
+}
+
 /* Small screens: single column */
 @media (max-width: 640px) {
   form.responsive-form {

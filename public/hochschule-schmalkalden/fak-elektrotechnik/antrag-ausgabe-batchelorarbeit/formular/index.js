@@ -123,8 +123,9 @@ async function handleFormSubmit(event) {
       await handleApproveSubmission(token);
     }
     
-    // Zeige Erfolgsmeldung
     showSuccessMessage(userRole);
+    submitButton.value = originalButtonText;
+    disableForm();
     
   } catch (error) {
     // Bei Fehler: Button wieder aktivieren und Fehlermeldung anzeigen
@@ -241,7 +242,7 @@ function showSuccessMessage(userRole) {
   let message = '';
   
   if (!userRole) {
-    message = 'Ihr Antrag wurde erfolgreich eingereicht! Sie erhalten in Kürze eine Bestätigungs-E-Mail mit einem Link zur Statusverfolgung.';
+    message = 'Ihr Antrag wurde erfolgreich eingereicht. Sie erhalten in Kürze eine Bestätigungs-E-Mail mit einem Link zur Statusverfolgung.';
   } else if (userRole === 'pruefungsamt') {
     message = 'Die Änderungen wurden erfolgreich gespeichert.';
   } else if (['betreuer_betrieblich', 'betreuer_hochschule', 'betreuer_korreferent'].includes(userRole)) {
@@ -250,7 +251,7 @@ function showSuccessMessage(userRole) {
     message = 'Der Antrag wurde erfolgreich genehmigt. Die entsprechenden E-Mails wurden versendet.';
   }
   
-  messageContainer.innerHTML = `<div class="info-box" style="background-color: #d4edda; border-color: #c3e6cb; color: #155724;"><p><strong>✓ Erfolgreich!</strong> ${message}</p></div>`;
+  messageContainer.innerHTML = `<div class="info-box" style="background-color: #d4edda; border-color: #c3e6cb; color: #155724;"><p>${message}</p></div>`;
   messageContainer.style.display = 'block';
   
   // Scrolle zur Nachricht
