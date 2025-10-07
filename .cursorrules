@@ -7,8 +7,8 @@
 Node.js application with API services, form handling, and email functionality.
 
 ## Key Guidelines
-- make a plan first and ask for confirmation
 - make small changes at a time
+- only change what is needed to fulfill the request
 
 ## File Structure
 - `/api/` - Backend services and utilities

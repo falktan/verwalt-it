@@ -92,7 +92,7 @@ Betreuer:
 Der Antrag wurde vom Prüfungsausschuss genehmigt und kann nun bearbeitet werden.
 
 Mit freundlichen Grüßen
-Verwalt-IT.de`;
+Verwalt-it.de`;
 
 	return {to: email_to, subject, body};
 }

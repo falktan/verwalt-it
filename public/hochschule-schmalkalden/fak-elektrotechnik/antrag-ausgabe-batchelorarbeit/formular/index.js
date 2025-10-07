@@ -99,18 +99,38 @@ function showRoleInfo(userRole) {
 async function handleFormSubmit(event) {
   event.preventDefault();
 
+  const submitButton = document.querySelector('#submit-button');
+  const originalButtonText = submitButton.value;
+  
+  // Deaktiviere Button und ändere Text
+  submitButton.disabled = true;
+  submitButton.value = 'Wird gesendet...';
+  
+  // Verstecke vorherige Nachrichten
+  hideMessage();
+
   const token = getAccessToken();
   const userRole = submissionData?.userRole;
 
-  if(!userRole) {
-    await handleCreateSubmission(event);
-  } else if(userRole === 'pruefungsamt') {
-    console.log('handleUpdateSubmission');
-    await handleUpdateSubmission(event, token);
-  } else if(['betreuer_betrieblich', 'betreuer_hochschule', 'betreuer_korreferent'].includes(userRole)) {
-    await handleConfirmSubmission(token);
-  } else if(userRole === 'pruefungsausschuss') {
-    await handleApproveSubmission(token);
+  try {
+    if(!userRole) {
+      await handleCreateSubmission(event);
+    } else if(userRole === 'pruefungsamt') {
+      await handleUpdateSubmission(event, token);
+    } else if(['betreuer_betrieblich', 'betreuer_hochschule', 'betreuer_korreferent'].includes(userRole)) {
+      await handleConfirmSubmission(token);
+    } else if(userRole === 'pruefungsausschuss') {
+      await handleApproveSubmission(token);
+    }
+    
+    // Zeige Erfolgsmeldung
+    showSuccessMessage(userRole);
+    
+  } catch (error) {
+    // Bei Fehler: Button wieder aktivieren und Fehlermeldung anzeigen
+    submitButton.disabled = false;
+    submitButton.value = originalButtonText;
+    showErrorMessage(error.message);
   }
 }
 
@@ -121,6 +141,10 @@ async function handleCreateSubmission(event) {
     body: JSON.stringify({formData: getFormData(event)})
   });
 
+  if (!response.ok) {
+    throw new Error('Fehler beim Erstellen der Einreichung');
+  }
+
   const result = await response.json();
 }
 
@@ -129,7 +153,7 @@ async function handleUpdateSubmission(event, token) {
   const confirmations = getConfirmationsData(event);
   
   // Update both form data and confirmations
-  await Promise.all([
+  const responses = await Promise.all([
     fetch('/api/update-submission', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -141,6 +165,13 @@ async function handleUpdateSubmission(event, token) {
       body: JSON.stringify({confirmations, accessToken: token})
     })
   ]);
+  
+  // Check if all requests were successful
+  responses.forEach((response, index) => {
+    if (!response.ok) {
+      throw new Error('Fehler beim Aktualisieren der Daten');
+    }
+  });
 }
 
 async function handleConfirmSubmission(token) {
@@ -149,6 +180,10 @@ async function handleConfirmSubmission(token) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({accessToken: token})
   });
+  
+  if (!response.ok) {
+    throw new Error('Fehler beim Bestätigen der Einreichung');
+  }
 }
 
 async function handleApproveSubmission(token) {
@@ -157,6 +192,10 @@ async function handleApproveSubmission(token) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({accessToken: token})
   });
+  
+  if (!response.ok) {
+    throw new Error('Fehler beim Genehmigen des Antrags');
+  }
 }
 
 function getFormData(event) {
@@ -195,6 +234,43 @@ function getAccessToken() {
   const urlParams = new URLSearchParams(window.location.search);
   const token = urlParams.get('token');
   return token;
+}
+
+function showSuccessMessage(userRole) {
+  const messageContainer = document.querySelector('#message-container');
+  let message = '';
+  
+  if (!userRole) {
+    message = 'Ihr Antrag wurde erfolgreich eingereicht! Sie erhalten in Kürze eine Bestätigungs-E-Mail mit einem Link zur Statusverfolgung.';
+  } else if (userRole === 'pruefungsamt') {
+    message = 'Die Änderungen wurden erfolgreich gespeichert.';
+  } else if (['betreuer_betrieblich', 'betreuer_hochschule', 'betreuer_korreferent'].includes(userRole)) {
+    message = 'Ihre Bestätigung wurde erfolgreich übermittelt. Vielen Dank!';
+  } else if (userRole === 'pruefungsausschuss') {
+    message = 'Der Antrag wurde erfolgreich genehmigt. Die entsprechenden E-Mails wurden versendet.';
+  }
+  
+  messageContainer.innerHTML = `<div class="info-box" style="background-color: #d4edda; border-color: #c3e6cb; color: #155724;"><p><strong>✓ Erfolgreich!</strong> ${message}</p></div>`;
+  messageContainer.style.display = 'block';
+  
+  // Scrolle zur Nachricht
+  messageContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function showErrorMessage(errorMessage) {
+  const messageContainer = document.querySelector('#message-container');
+  
+  messageContainer.innerHTML = `<div class="info-box" style="background-color: #f8d7da; border-color: #f5c6cb; color: #721c24;"><p><strong>Fehler!</strong> ${errorMessage || 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.'}</p></div>`;
+  messageContainer.style.display = 'block';
+  
+  // Scrolle zur Nachricht
+  messageContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function hideMessage() {
+  const messageContainer = document.querySelector('#message-container');
+  messageContainer.style.display = 'none';
+  messageContainer.innerHTML = '';
 }
 
 // Make handleFormSubmit globally available for the HTML form
