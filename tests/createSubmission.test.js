@@ -22,8 +22,35 @@ describe('Create Submission Endpoint', () => {
 
   test('POST /api/create-submission should create submission successfully', async () => {
     const formData = {
-      studentName: 'Test Student',
-      email: 'test@example.com'
+      nachname: 'Mustermann',
+      vorname: 'Max',
+      geburtsdatum: '2000-01-01',
+      geburtsort: 'Berlin',
+      matrikelnummer: '12345',
+      plz_ort: '10115 Berlin',
+      wohnanschrift: 'Musterstraße 1',
+      email: 'user@example.com',
+      studiengang: 'IT (722)',
+      vertiefungsrichtung: 'Software Engineering',
+      thema: 'Entwicklung einer modernen Webanwendung',
+      erste_bachelorarbeit: 'ja',
+      einzelarbeit: 'ja',
+      weitere_bearbeiter: '',
+      noch_zu_erbringen: 'Keine',
+      unternehmen_institution: 'Musterfirma GmbH',
+      arbeitsort: 'Berlin',
+      betreuer_betrieblich_name: 'Dr. Schmidt',
+      betreuer_betrieblich_tel: '030-12345678',
+      betreuer_betrieblich_email: 'user@example.com',
+      hochschulbetreuer_grad: 'Prof. Dr.',
+      hochschulbetreuer_name: 'Müller',
+      hochschulbetreuer_tel: '03683-688-1234',
+      hochschulbetreuer_email: 'user@example.com',
+      korreferent_grad: 'Dr.',
+      korreferent_name: 'Weber',
+      korreferent_tel: '03683-688-5678',
+      korreferent_email: 'user@example.com',
+      datenschutz_zustimmung: 'on'
     };
 
     const response = await fetch(`http://localhost:${port}/api/create-submission`, {
@@ -38,5 +65,28 @@ describe('Create Submission Endpoint', () => {
     
     expect(response.status).toBe(200);
     expect(data.message).toBe('Submission created successfully');
+  });
+
+  test('POST /api/create-submission should reject invalid data', async () => {
+    const invalidFormData = {
+      nachname: 'Mustermann',
+      email: 'invalid-email'
+      // Fehlende erforderliche Felder
+    };
+
+    const response = await fetch(`http://localhost:${port}/api/create-submission`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ formData: invalidFormData })
+    });
+
+    const data = await response.json();
+    
+    expect(response.status).toBe(400);
+    expect(data.error).toBe('Validation Error');
+    expect(data.details).toBeDefined();
+    expect(Array.isArray(data.details)).toBe(true);
   });
 });

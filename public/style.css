@@ -189,6 +189,13 @@ form.responsive-form input[type="submit"]:disabled {
   outline-offset: 0;
 }
 
+/* Validierung - Pflichtfeld-Markierung */
+.required {
+  color: #d32f2f;
+  font-weight: bold;
+  margin-left: 2px;
+}
+
 /* Small screens: single column */
 @media (max-width: 640px) {
   form.responsive-form {

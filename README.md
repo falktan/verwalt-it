@@ -118,9 +118,34 @@ Um das formular schnell ausfüllen zu können kann man folgendes Bookmarklet (ei
 ```
 javascript: (function(){
     const emailTo = "user@example.com";
+    document.getElementById("nachname").value = "Mustermann";
+    document.getElementById("vorname").value = "Max";
+    document.getElementById("geburtsdatum").value = "2000-01-01";
+    document.getElementById("geburtsort").value = "Berlin";
+    document.getElementById("matrikelnummer").value = "12345";
+    document.getElementById("plz_ort").value = "10115 Berlin";
+    document.getElementById("wohnanschrift").value = "Musterstraße 1";
     document.getElementById("email").value = emailTo;
+    document.getElementById("studiengang").value = "IT (722)";
+    document.getElementById("vertiefungsrichtung").value = "Software Engineering";
+    document.getElementById("thema").value = "Entwicklung einer modernen Webanwendung";
+    document.getElementById("erste_bachelorarbeit").value = "ja";
+    document.getElementById("einzelarbeit").value = "ja";
+    document.getElementById("weitere_bearbeiter").value = "";
+    document.getElementById("noch_zu_erbringen").value = "Keine";
+    document.getElementById("unternehmen_institution").value = "Musterfirma GmbH";
+    document.getElementById("arbeitsort").value = "Musterstraße 1, 10115 Berlin";
+    document.getElementById("betreuer_betrieblich_name").value = "Dr. Schmidt";
+    document.getElementById("betreuer_betrieblich_tel").value = "030-12345678";
     document.getElementById("betreuer_betrieblich_email").value = emailTo;
+    document.getElementById("hochschulbetreuer_grad").value = "Prof. Dr.";
+    document.getElementById("hochschulbetreuer_name").value = "Müller";
+    document.getElementById("hochschulbetreuer_tel").value = "03683-688-1234";
     document.getElementById("hochschulbetreuer_email").value = emailTo;
+    document.getElementById("korreferent_grad").value = "Dr.";
+    document.getElementById("korreferent_name").value = "Weber";
+    document.getElementById("korreferent_tel").value = "03683-688-5678";
     document.getElementById("korreferent_email").value = emailTo;
+    document.getElementById("datenschutz_zustimmung").checked = true;
 })();
 ```
