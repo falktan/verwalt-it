@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
-// Schema für Formulardaten
-const formDataSchema = yup.object({
+// Basis-Schema für gemeinsame Felder
+const baseFormDataSchema = {
   nachname: yup.string().required('Nachname ist erforderlich'),
   vorname: yup.string().required('Vorname ist erforderlich'),
   geburtsdatum: yup.string().required('Geburtsdatum ist erforderlich'),
@@ -31,6 +31,22 @@ const formDataSchema = yup.object({
   korreferent_tel: yup.string().required('Telefon des Korreferenten ist erforderlich'),
   korreferent_email: yup.string().email('Ungültige E-Mail-Adresse').required('E-Mail des Korreferenten ist erforderlich'),
   datenschutz_zustimmung: yup.string().oneOf(['on'], 'Datenschutzerklärung muss akzeptiert werden').required('Datenschutzerklärung muss akzeptiert werden')
+};
+
+// Schema für erste Erstellung durch Studenten (Prüfungsamt-Felder optional)
+const formDataSchemaInitial = yup.object({
+  ...baseFormDataSchema,
+  pruefungsleistungen_noch_zu_erbringen: yup.string().default(''),
+  immatrikulation_laufend: yup.string().oneOf(['ja', 'nein', ''], 'Ungültige Auswahl').default(''),
+  zulassung_praxissemester: yup.string().oneOf(['ja', 'nein', ''], 'Ungültige Auswahl').default('')
+}).noUnknown(true, 'Unbekannte Felder sind nicht erlaubt');
+
+// Schema für Updates durch Prüfungsamt (Prüfungsamt-Felder Pflicht)
+const formDataSchemaUpdate = yup.object({
+  ...baseFormDataSchema,
+  pruefungsleistungen_noch_zu_erbringen: yup.string().default(''),
+  immatrikulation_laufend: yup.string().oneOf(['ja', 'nein'], 'Ungültige Auswahl').required('Immatrikulation im laufenden Semester ist erforderlich'),
+  zulassung_praxissemester: yup.string().oneOf(['ja', 'nein'], 'Ungültige Auswahl').required('Zulassung zum Praxissemester ist erforderlich')
 }).noUnknown(true, 'Unbekannte Felder sind nicht erlaubt');
 
 // Schema für Access Token
@@ -49,7 +65,7 @@ const confirmationsSchema = yup.object({
 // Endpunkt-spezifische Schemas
 export const schemas = {
   createSubmission: yup.object({
-    formData: formDataSchema.required()
+    formData: formDataSchemaInitial.required()
   }).noUnknown(true),
 
   fetchSubmission: accessTokenSchema,
@@ -57,7 +73,7 @@ export const schemas = {
   confirmSubmission: accessTokenSchema,
 
   updateSubmission: yup.object({
-    formData: formDataSchema.required(),
+    formData: formDataSchemaUpdate.required(),
     accessToken: yup.string().required('Access Token ist erforderlich')
   }).noUnknown(true),
 

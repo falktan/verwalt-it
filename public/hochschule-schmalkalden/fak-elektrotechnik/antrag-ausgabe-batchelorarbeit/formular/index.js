@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   if(!token) {
     // Student öffnet die Seite als leeres Formular.
     showRoleInfo('student-initial');
+    // Prüfungsamt-Felder für Studenten deaktivieren
+    updatePruefungsamtFields('student');
     return;
   }
 
@@ -48,6 +50,9 @@ function updateForm() {
   // Zeige rollenspezifische Info-Box an
   showRoleInfo(userRole);
 
+  // Steuere Prüfungsamt-Felder basierend auf Benutzerrolle
+  updatePruefungsamtFields(userRole);
+
   if(userRole === 'student') {
     submitButton.style.display = 'none';
     addConfirmationFields();
@@ -62,6 +67,71 @@ function updateForm() {
     submitButton.value = 'Antrag genehmigen';
     addConfirmationFields();
   }
+}
+
+function updatePruefungsamtFields(userRole) {
+  const pruefungsamtFields = [
+    'pruefungsleistungen_noch_zu_erbringen',
+    'immatrikulation_laufend', 
+    'zulassung_praxissemester'
+  ];
+
+  pruefungsamtFields.forEach(fieldName => {
+    const field = document.querySelector(`[name="${fieldName}"]`);
+    if (!field) return;
+
+    const label = document.querySelector(`label[for="${field.id}"]`);
+    
+    if (userRole === 'student' || !userRole) {
+      // Für Studenten: Felder nicht editierbar und nicht Pflicht
+      field.disabled = true;
+      field.required = false;
+      
+      // Entferne required-Markierung aus dem Label
+      if (label) {
+        const requiredSpan = label.querySelector('.required');
+        if (requiredSpan) {
+          requiredSpan.remove();
+        }
+      }
+    } else if (userRole === 'pruefungsamt') {
+      // Für Prüfungsamt: Select-Felder editierbar und Pflicht
+      field.disabled = false;
+      
+      // Nur Select-Felder sind Pflicht
+      if (field.tagName === 'SELECT') {
+        field.required = true;
+        
+        // Füge required-Markierung zum Label hinzu falls nicht vorhanden
+        if (label && !label.querySelector('.required')) {
+          label.innerHTML += ' <span class="required">*</span>';
+        }
+      } else {
+        // Textarea ist optional
+        field.required = false;
+        
+        // Entferne required-Markierung aus dem Label
+        if (label) {
+          const requiredSpan = label.querySelector('.required');
+          if (requiredSpan) {
+            requiredSpan.remove();
+          }
+        }
+      }
+    } else {
+      // Für andere Rollen: Felder nicht editierbar
+      field.disabled = true;
+      field.required = false;
+      
+      // Entferne required-Markierung aus dem Label
+      if (label) {
+        const requiredSpan = label.querySelector('.required');
+        if (requiredSpan) {
+          requiredSpan.remove();
+        }
+      }
+    }
+  });
 }
 
 function addConfirmationFields() {
