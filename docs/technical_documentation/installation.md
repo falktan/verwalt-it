@@ -28,7 +28,6 @@ Hier wird insbesondere eine Verbindung zu einem SMTP-Server und zu einer Datenba
 
 ### 4. Anwendung starten
 
-Für Testeinstellungen:
 ```bash
 export NODE_ENV=production
 npm start
@@ -47,3 +46,4 @@ Erwartete Antwort: `{"status": "ok", "timestamp": "..."}`
 ### 6. Reverse Proxy (empfohlen)
 
 Für Produktionsumgebungen sollte ein Reverse Proxy (nginx, Apache) vor der Anwendung eingesetzt werden, um HTTPS zu ermöglichen.
+Der lokal unter den mit "PORT" konfiguriertem Port sollte entsprechend exponiert werden. Die Anwendung selbst hat keine Behandlung von SSL konfiguriert. Der Reverse Proxy sollte also die SSL-Terminierung vornehmen.
