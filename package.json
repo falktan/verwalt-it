@@ -15,6 +15,7 @@
     "mongodb-memory-server": "^10.2.0",
     "morgan": "~1.10.1",
     "nodemailer": "^7.0.6",
+    "pdf-lib": "^1.17.1",
     "yup": "^1.4.0"
   },
   "devDependencies": {
