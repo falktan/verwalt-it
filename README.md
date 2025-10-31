@@ -26,7 +26,7 @@ Aktuell ermöglicht die Anwendung die Anmeldung zur Abschlussarbeit. Nutzer kön
 
 ### Umgebung konfigurieren
 ```
-cp .env.example .env
+cp .env.local.example .env
 ```
 
 ### Installieren der Abhängigkeiten
