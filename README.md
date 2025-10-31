@@ -138,10 +138,10 @@ javascript: (function(){
     document.getElementById("betreuer_betrieblich_name").value = "Dr. Schmidt";
     document.getElementById("betreuer_betrieblich_tel").value = "030-12345678";
     document.getElementById("betreuer_betrieblich_email").value = emailTo;
-    document.getElementById("hochschulbetreuer_grad").value = "Prof. Dr.";
-    document.getElementById("hochschulbetreuer_name").value = "Müller";
-    document.getElementById("hochschulbetreuer_tel").value = "03683-688-1234";
-    document.getElementById("hochschulbetreuer_email").value = emailTo;
+    document.getElementById("betreuer_hochschule_grad").value = "Prof. Dr.";
+    document.getElementById("betreuer_hochschule_name").value = "Müller";
+    document.getElementById("betreuer_hochschule_tel").value = "03683-688-1234";
+    document.getElementById("betreuer_hochschule_email").value = emailTo;
     document.getElementById("korreferent_grad").value = "Dr.";
     document.getElementById("korreferent_name").value = "Weber";
     document.getElementById("korreferent_tel").value = "03683-688-5678";

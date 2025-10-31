@@ -33,10 +33,10 @@ const baseFormDataSchema = {
   betreuer_betrieblich_name: noUrlValidation.required('Name des betrieblichen Betreuers ist erforderlich'),
   betreuer_betrieblich_tel: noUrlValidation.required('Telefon des betrieblichen Betreuers ist erforderlich'),
   betreuer_betrieblich_email: yup.string().email('Ungültige E-Mail-Adresse').required('E-Mail des betrieblichen Betreuers ist erforderlich'),
-  hochschulbetreuer_grad: noUrlValidation,
-  hochschulbetreuer_name: noUrlValidation.required('Name des Hochschulbetreuers ist erforderlich'),
-  hochschulbetreuer_tel: noUrlValidation.required('Telefon des Hochschulbetreuers ist erforderlich'),
-  hochschulbetreuer_email: yup.string().email('Ungültige E-Mail-Adresse').required('E-Mail des Hochschulbetreuers ist erforderlich'),
+  betreuer_hochschule_grad: noUrlValidation,
+  betreuer_hochschule_name: noUrlValidation.required('Name des Hochschulbetreuers ist erforderlich'),
+  betreuer_hochschule_tel: noUrlValidation.required('Telefon des Hochschulbetreuers ist erforderlich'),
+  betreuer_hochschule_email: yup.string().email('Ungültige E-Mail-Adresse').required('E-Mail des Hochschulbetreuers ist erforderlich'),
   korreferent_grad: noUrlValidation,
   korreferent_name: noUrlValidation.required('Name des Korreferenten ist erforderlich'),
   korreferent_tel: noUrlValidation.required('Telefon des Korreferenten ist erforderlich'),
@@ -69,7 +69,7 @@ const accessTokenSchema = yup.object({
 const confirmationsSchema = yup.object({
   betreuer_betrieblich: yup.boolean().optional(),
   betreuer_hochschule: yup.boolean().optional(),
-  betreuer_korreferent: yup.boolean().optional(),
+  korreferent: yup.boolean().optional(),
   pruefungsamt: yup.boolean().optional()
 }).noUnknown(true);
 

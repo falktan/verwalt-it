@@ -28,7 +28,8 @@ export default function createApp() {
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
     app.use(cookieParser());
-    app.use(express.static('public', { extensions: ['html'] }));
+    app.use(express.static('public/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit',
+        { extensions: ['html'] }));
     app.use('/api', apiRouter);
     app.set('port', port);
 

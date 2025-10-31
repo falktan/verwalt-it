@@ -2,10 +2,10 @@ import 'dotenv/config';
 import nodemailer from 'nodemailer';
 
 
-export async function sendMail({to, subject, body}) {
+export async function sendMail({emailTo, subject, body}) {
     if (process.env.DISABLE_EMAIL === 'true') {
         console.log('Email sending disabled. Would have sent');
-        console.log({to, subject, body});
+        console.log({emailTo, subject, body});
         return;
     }
 
@@ -21,7 +21,7 @@ export async function sendMail({to, subject, body}) {
 
     const mailOptions = {
         from: process.env.SMTP_FROM,
-        to: to,
+        to: emailTo,
         subject: subject,
         text: body
     };

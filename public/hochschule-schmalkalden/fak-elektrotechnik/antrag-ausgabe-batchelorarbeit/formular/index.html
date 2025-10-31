@@ -6,15 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Antrag Batchelorarbeit - Hochschule Schmalkalden</title>
   <link rel="stylesheet" href="/style.css">
-  <script src="/main/verwalt-it-content-wrapper.js"></script>
+  <script src="/verwalt-it-content-wrapper.js"></script>
   <script src="index.js"></script>
 </head>
 
 <body>
   <verwalt-it-content-wrapper>
-    <img slot="logo" class="logo" src="https://www.hs-schmalkalden.de/typo3conf/ext/hsm_sitepackage/Resources/Public/Images/logo.jpg"
-      alt="Logo Hochschule Schmalkalden">
-
     <h1>Antrag auf Ausgabe einer Bachelorarbeit</h1>
 
     <!-- Rollenspezifische Übersichtstexte -->
@@ -78,7 +75,7 @@
       </div>
     </div>
 
-    <div id="role-info-betreuer_korreferent" class="role-info" style="display: none;">
+    <div id="role-info-korreferent" class="role-info" style="display: none;">
       <div class="info-box">
         <h3>Korreferent - Bestätigung</h3>
         <p>Sie wurden als Korreferent für diese Bachelorarbeit angegeben.</p>
@@ -234,20 +231,20 @@
       <h3>Referent und Hochschulbetreuer</h3>
 
       <div class="field half">
-        <label for="hochschulbetreuer_grad">Akadem. Grad:</label>
-        <input type="text" id="hochschulbetreuer_grad" name="hochschulbetreuer_grad">
+        <label for="betreuer_hochschule_grad">Akadem. Grad:</label>
+        <input type="text" id="betreuer_hochschule_grad" name="betreuer_hochschule_grad">
       </div>
       <div class="field half">
-        <label for="hochschulbetreuer_name">Name: <span class="required">*</span></label>
-        <input type="text" id="hochschulbetreuer_name" name="hochschulbetreuer_name" required>
+        <label for="betreuer_hochschule_name">Name: <span class="required">*</span></label>
+        <input type="text" id="betreuer_hochschule_name" name="betreuer_hochschule_name" required>
       </div>
       <div class="field half">
-        <label for="hochschulbetreuer_tel">Telefon: <span class="required">*</span></label>
-        <input type="tel" id="hochschulbetreuer_tel" name="hochschulbetreuer_tel" required>
+        <label for="betreuer_hochschule_tel">Telefon: <span class="required">*</span></label>
+        <input type="tel" id="betreuer_hochschule_tel" name="betreuer_hochschule_tel" required>
       </div>
       <div class="field half">
-        <label for="hochschulbetreuer_email">E-Mail: <span class="required">*</span></label>
-        <input type="email" id="hochschulbetreuer_email" name="hochschulbetreuer_email" required>
+        <label for="betreuer_hochschule_email">E-Mail: <span class="required">*</span></label>
+        <input type="email" id="betreuer_hochschule_email" name="betreuer_hochschule_email" required>
       </div>
 
       <h3>Korreferent</h3>

@@ -16,7 +16,7 @@ describe('Email Render Service', () => {
     email: 'max.mustermann@example.com',
     betreuer_betrieblich_email: 'betreuer.betrieblich@example.com',
     betreuer_hochschule_email: 'betreuer.hochschule@example.com',
-    betreuer_korreferent_email: 'betreuer.korreferent@example.com'
+    korreferent_email: 'betreuer.korreferent@example.com'
   };
 
   const mockSecrets = {

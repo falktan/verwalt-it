@@ -15,10 +15,7 @@
                 <div class="content-wrapper" id="content-wrapper">
                     <div class="nav-bar">
                         <a href="/">
-                            <slot name="logo">
-                                <!-- Default logo if none is provided via slot -->
-                                <img class="logo" src="/assets/logo.svg" alt="Logo">
-                            </slot>
+                            <img class="logo" src="https://www.hs-schmalkalden.de/typo3conf/ext/hsm_sitepackage/Resources/Public/Images/logo.jpg" alt="Logo Hochschule Schmalkalden"> 
                         </a>
 					<br/>
                     </div>
@@ -31,7 +28,6 @@
                     <div class="footer" id="footer">
 						<div class="nav-links">
                             <a href="/">Startseite</a>
-                            <a href="/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit">FH Schmalkalden</a>
                             <a href="/impressum">Impressum</a>
                             <a href="/datenschutzerklaerung">Datenschutz</a>
                             <a href="https://github.com/falktan/verwalt-it" target="_blank">Verwalt-It auf GitHub</a>

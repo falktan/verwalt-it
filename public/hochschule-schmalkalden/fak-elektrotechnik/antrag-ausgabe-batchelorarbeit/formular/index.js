@@ -60,7 +60,7 @@ function updateForm() {
   } else if(userRole === 'pruefungsamt') {
     submitButton.value = 'Speichern';
     addConfirmationFields();
-  } else if(['betreuer_betrieblich', 'betreuer_hochschule', 'betreuer_korreferent'].includes(userRole)) {
+  } else if(['betreuer_betrieblich', 'betreuer_hochschule', 'korreferent'].includes(userRole)) {
     submitButton.value = 'Bestätigen';
     disableForm();
   } else if(userRole === 'pruefungsausschuss') {
@@ -144,11 +144,11 @@ function addConfirmationFields() {
       <label for="betreuer_betrieblich_confirmation">Bestätigung des betrieblichen Betreuers</label>
     </div>
     <div class="field full checkbox">
-      <input type="checkbox" id="hochschulbetreuer_confirmation" name="hochschulbetreuer_confirmation" ${confirmations.betreuer_hochschule ? 'checked' : ''}>
-      <label for="hochschulbetreuer_confirmation">Bestätigung des Referenten</label>
+      <input type="checkbox" id="betreuer_hochschule_confirmation" name="betreuer_hochschule_confirmation" ${confirmations.betreuer_hochschule ? 'checked' : ''}>
+      <label for="betreuer_hochschule_confirmation">Bestätigung des Referenten</label>
     </div>
     <div class="field full checkbox">
-      <input type="checkbox" id="korreferent_confirmation" name="korreferent_confirmation" ${confirmations.betreuer_korreferent ? 'checked' : ''}>
+      <input type="checkbox" id="korreferent_confirmation" name="korreferent_confirmation" ${confirmations.korreferent ? 'checked' : ''}>
       <label for="korreferent_confirmation">Bestätigung des Korreferenten</label>
     </div>
     <div class="field full checkbox">
@@ -195,7 +195,7 @@ async function handleFormSubmit(event) {
       await handleCreateSubmission(event);
     } else if(userRole === 'pruefungsamt') {
       await handleUpdateSubmission(event, token);
-    } else if(['betreuer_betrieblich', 'betreuer_hochschule', 'betreuer_korreferent'].includes(userRole)) {
+    } else if(['betreuer_betrieblich', 'betreuer_hochschule', 'korreferent'].includes(userRole)) {
       await handleConfirmSubmission(token);
     } else if(userRole === 'pruefungsausschuss') {
       await handleApproveSubmission(token);
@@ -290,7 +290,7 @@ function getFormData() {
   const data = Object.fromEntries(formData.filter(
     ([key]) => ![
       'betreuer_betrieblich_confirmation', 
-      'hochschulbetreuer_confirmation', 
+      'betreuer_hochschule_confirmation', 
       'korreferent_confirmation', 
       'pruefungsamt_confirmation'].includes(key)));
   return data;
@@ -304,8 +304,8 @@ function getConfirmationsData() {
   // Map form field names to confirmation keys
   const confirmationMapping = {
     'betreuer_betrieblich_confirmation': 'betreuer_betrieblich',
-    'hochschulbetreuer_confirmation': 'betreuer_hochschule', 
-    'korreferent_confirmation': 'betreuer_korreferent',
+    'betreuer_hochschule_confirmation': 'betreuer_hochschule', 
+    'korreferent_confirmation': 'korreferent',
     'pruefungsamt_confirmation': 'pruefungsamt'
   };
   
@@ -332,7 +332,7 @@ function showSuccessMessage(userRole) {
     message = 'Ihr Antrag wurde erfolgreich eingereicht. Sie erhalten in Kürze eine Bestätigungs-E-Mail mit einem Link zur Statusverfolgung.';
   } else if (userRole === 'pruefungsamt') {
     message = getPruefungsamtMessage();
-  } else if (['betreuer_betrieblich', 'betreuer_hochschule', 'betreuer_korreferent'].includes(userRole)) {
+  } else if (['betreuer_betrieblich', 'betreuer_hochschule', 'korreferent'].includes(userRole)) {
     message = 'Ihre Bestätigung wurde erfolgreich übermittelt. Vielen Dank!';
   } else if (userRole === 'pruefungsausschuss') {
     message = 'Der Antrag wurde erfolgreich genehmigt. Die entsprechenden E-Mails wurden versendet.';
@@ -348,7 +348,7 @@ function showSuccessMessage(userRole) {
 function getPruefungsamtMessage() {
   const confirmations = getConfirmationsData();
   
-  const requiredConfirmations = ['betreuer_betrieblich', 'betreuer_hochschule', 'betreuer_korreferent', 'pruefungsamt'];
+  const requiredConfirmations = ['betreuer_betrieblich', 'betreuer_hochschule', 'korreferent', 'pruefungsamt'];
   const missingConfirmations = requiredConfirmations.some(role => !confirmations[role]);
   
   // Prüfungsamt selbst hat nicht bestätigt

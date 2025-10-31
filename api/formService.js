@@ -65,7 +65,7 @@ function createSecrets() {
 }
 
 async function checkAndHandleCompletion(accessToken) {
-    const requiredConfirmations = ['betreuer_betrieblich', 'betreuer_hochschule', 'betreuer_korreferent', 'pruefungsamt'];
+    const requiredConfirmations = ['betreuer_betrieblich', 'betreuer_hochschule', 'korreferent', 'pruefungsamt'];
 
     const submission = await getSubmission(accessToken)
     const confirmations = submission.confirmations;
