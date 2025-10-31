@@ -25,7 +25,7 @@ async function analyzePdfFields(pdfPath) {
       console.log('Kein Formular gefunden.');
       return;
     }
-    
+
     
     const fields = form.getFields();
     const textFields = fields.filter(f => f.constructor.name === 'PDFTextField');
@@ -44,7 +44,7 @@ async function analyzePdfFields(pdfPath) {
     
     const allFields = fields.map(field => ({
       name: field.getName(),
-      type: field.constructor.name.replace('PDF', ''),
+      type: field.constructor.name,
       required: field.isRequired(),
       ...(field.getOptions && { options: field.getOptions() })
     }));

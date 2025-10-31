@@ -1,0 +1,367 @@
+[
+    {
+      "name": "undefined",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "undefined_2",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Matrikelnummer",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Hauptwohnanschrift StrasseNr",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "PLZOrt",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "emailAdresse",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Thema der Bachelorarbeit voraussichtlicher Wortlaut kein Arbeitstitel 1",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Thema der Bachelorarbeit voraussichtlicher Wortlaut kein Arbeitstitel 2",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Thema der Bachelorarbeit voraussichtlicher Wortlaut kein Arbeitstitel 3",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Thema der Bachelorarbeit voraussichtlicher Wortlaut kein Arbeitstitel 4",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Thema der Bachelorarbeit voraussichtlicher Wortlaut kein Arbeitstitel 5",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Thema der Bachelorarbeit voraussichtlicher Wortlaut kein Arbeitstitel 6",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Falls nein Auflistung weiterer Bearbeiter",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Unterschrift Prüfungsamt",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Bezeichnung",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Anschrift des Arbeitsortes 1",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Anschrift des Arbeitsortes 2",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Referent",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Korreferent",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Ausgabedatum",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Abgabedatum",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Neuer Abgabetermin",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Unterschrift Prüfungsausschuss_3",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "geb. am",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Geburtsort",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Text3.1.0",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Text3.1.1",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Check Box4",
+      "type": "PDFCheckBox",
+      "required": false
+    },
+    {
+      "name": "Check Box6",
+      "type": "PDFCheckBox",
+      "required": false
+    },
+    {
+      "name": "Check Box7",
+      "type": "PDFCheckBox",
+      "required": false
+    },
+    {
+      "name": "Check Box8",
+      "type": "PDFCheckBox",
+      "required": false
+    },
+    {
+      "name": "Check Box9",
+      "type": "PDFCheckBox",
+      "required": false
+    },
+    {
+      "name": "Check Box10",
+      "type": "PDFCheckBox",
+      "required": false
+    },
+    {
+      "name": "Check Box11",
+      "type": "PDFCheckBox",
+      "required": false
+    },
+    {
+      "name": "Check Box12",
+      "type": "PDFCheckBox",
+      "required": false
+    },
+    {
+      "name": "Check Box13",
+      "type": "PDFCheckBox",
+      "required": false
+    },
+    {
+      "name": "offene Leistungen",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Check Box16",
+      "type": "PDFCheckBox",
+      "required": false
+    },
+    {
+      "name": "Check Box17",
+      "type": "PDFCheckBox",
+      "required": false
+    },
+    {
+      "name": "Check Box18",
+      "type": "PDFCheckBox",
+      "required": false
+    },
+    {
+      "name": "Check Box19",
+      "type": "PDFCheckBox",
+      "required": false
+    },
+    {
+      "name": "Name",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Tel",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Unterschrift",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "akadem Grad",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Check Box20",
+      "type": "PDFCheckBox",
+      "required": false
+    },
+    {
+      "name": "Check Box21",
+      "type": "PDFCheckBox",
+      "required": false
+    },
+    {
+      "name": "Unterschrift Prüfungsausschuss",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Check Box1",
+      "type": "PDFCheckBox",
+      "required": false
+    },
+    {
+      "name": "Vorname",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Datum-2",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Unterschrift Studierender",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Datum-3",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Name-2",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Tel-2",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "email-2",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Datum_4",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Name-3",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "email-3",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "akadem Grad-2",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Name-4",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Tel-3",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "email-4",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Datum-5",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Unterschrift-4",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Datum-6",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Datum-7",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Datum_8",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Datum-9",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Datum-10",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Text1",
+      "type": "PDFTextField",
+      "required": false
+    },
+    {
+      "name": "Check Box2",
+      "type": "PDFCheckBox",
+      "required": false
+    },
+    {
+      "name": "Text4",
+      "type": "PDFTextField",
+      "required": false
+    }
+]

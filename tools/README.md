@@ -2,19 +2,13 @@
 
 Verschiedene Hilfswerkzeuge für die Verwaltung und Entwicklung der verwalt-it Anwendung.
 
-## PDF-Feld-Analyse
+## PDF-Tools
+
+Alle Tools benötigen `pdf-lib`, das bereits installiert ist.
 
 ### Tool: `analyze-pdf-fields.js`
 
 Analysiert ein PDF-Dokument und listet alle verfügbaren Formularfelder auf.
-
-#### Abhängigkeiten
-
-Das Tool benötigt `pdf-lib`:
-
-```bash
-npm install pdf-lib
-```
 
 #### Verwendung
 
@@ -30,21 +24,47 @@ node tools/analyze-pdf-fields.js docs/formular.pdf
 
 #### Ausgabe
 
-Das Tool gibt folgende Informationen aus:
-
-- **Textfelder**: Alle Text-Eingabefelder mit Namen, Pflichtfeld-Status und maximaler Länge
-- **Checkboxen**: Alle Checkbox-Felder
-- **Radio-Gruppen**: Radio-Button-Gruppen mit verfügbaren Optionen
-- **Dropdown-Felder**: Dropdown/Select-Felder mit Optionen
-- **Buttons**: Button-Felder
-
-Am Ende wird eine JSON-Struktur mit allen Feldnamen ausgegeben, die für die Code-Generierung verwendet werden kann.
+- Zusammenfassung der Feldtypen und -anzahl
+- JSON-Struktur mit allen Feldnamen
 
 #### Zweck
 
-Dieses Tool hilft beim:
+- Mapping der PDF-Formularfelder zu den HTML-Formularfeldern
+- Verstehen der Struktur eines PDF-Formulars
+- Generieren von Code für das Ausfüllen des PDFs
 
-1. Mapping der PDF-Formularfelder zu den HTML-Formularfeldern
-2. Verstehen der Struktur eines neuen PDF-Formulars
-3. Generieren von Code für das Ausfüllen des PDFs
-4. Debugging von PDF-Formularproblemen
+---
+
+### Tool: `fill-pdf-debug.js`
+
+Füllt ein PDF-Formular mit den Namen der jeweiligen Felder für visuelles Mapping.
+
+#### Verwendung
+
+```bash
+node tools/fill-pdf-debug.js <pfad-zum-pdf>
+```
+
+#### Beispiel
+
+```bash
+node tools/fill-pdf-debug.js docs/formular.pdf
+```
+
+#### Ausgabe
+
+- Erstellt eine neue Datei mit dem Suffix `_filled.pdf`
+- Beispiel: `docs/formular.pdf` → `docs/formular_filled.pdf`
+
+#### Verhalten
+
+- **Textfelder**: Werden mit dem Feldnamen ausgefüllt
+- **Checkboxen**: Werden angehakt
+- **Radio-Buttons**: Erste Option wird ausgewählt
+- **Dropdowns**: Erste Option wird ausgewählt
+
+#### Zweck
+
+- Visuelles Mapping der PDF-Felder
+- Bestätigung, dass alle Felder gefunden wurden
+- Debugging von Position und Layout der Felder
