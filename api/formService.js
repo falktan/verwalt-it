@@ -10,10 +10,9 @@ export async function fetchSubmission({accessToken}) {
 }
 
 export async function handleCreate({formData}) {
-    const secrets = createSecrets();
-    const encryptedFormData = encryptData(formData, secrets.formEncryptionSecret);
-    await storeNewSubmission({submissionId: secrets.submissionId, encryptedFormData});
-    await sendEmailsNewSubmission({formData, secrets});
+    const submissionId = createSubmissionId();
+    await storeNewSubmission({submissionId, formData});
+    await sendEmailsNewSubmission({formData, submissionId});
 }
 
 export async function handleConfirm({accessToken}) {
@@ -24,10 +23,9 @@ export async function handleConfirm({accessToken}) {
 }
 
 export async function handleUpdate({formData, accessToken}) {
-    const {submissionId, formEncryptionSecret} = decodeAccessToken(accessToken);
-    const encryptedFormData = encryptData(formData, formEncryptionSecret);
+    const {submissionId} = decodeAccessToken(accessToken);
 
-    await updateSubmission({submissionId, encryptedFormData});
+    await updateSubmission({submissionId, formData});
 }
 
 export async function handleUpdateConfirmations({confirmations, accessToken}) {
@@ -37,31 +35,23 @@ export async function handleUpdateConfirmations({confirmations, accessToken}) {
 }
 
 export async function handlePruefungsausschussApproval({accessToken}) {
-    const {submissionId, formEncryptionSecret} = decodeAccessToken(accessToken);
+    const {submissionId} = decodeAccessToken(accessToken);
     const submission = await getSubmission(accessToken);
     
-    const secrets = {
-        submissionId,
-        formEncryptionSecret
-    };
-    
-    await sendEmailPruefungsausschussApproval({formData: submission.formData, secrets});
+    await sendEmailPruefungsausschussApproval({formData: submission.formData, submissionId});
 }
 
-async function sendEmailsNewSubmission({formData, secrets}) {
-    await Promise.all(renderEmailsNewSubmission({formData, secrets}).map(email => sendMail(email)));
+async function sendEmailsNewSubmission({formData, submissionId}) {
+    await Promise.all(renderEmailsNewSubmission({formData, submissionId}).map(email => sendMail(email)));
 }
 
-async function sendEmailPruefungsausschussApproval({formData, secrets}) {
-    const email = renderEmailPruefungsausschussApproval({formData, secrets});
+async function sendEmailPruefungsausschussApproval({formData}) {
+    const email = renderEmailPruefungsausschussApproval({formData});
     await sendMail(email);
 }
 
-function createSecrets() {
-    return {
-        formEncryptionSecret: createSecret(),
-        submissionId: createSecret()
-    }
+function createSubmissionId() {
+    return createSecret();
 }
 
 async function checkAndHandleCompletion(accessToken) {
@@ -81,14 +71,8 @@ async function handleAllConfirmationsComplete(accessToken) {
     console.log(`Alle Bestätigungen sind eingegangen`);
     
     const submission = await getSubmission(accessToken);
-    const {submissionId, formEncryptionSecret} = decodeAccessToken(accessToken);
-    
-    const secrets = {
-        submissionId,
-        formEncryptionSecret
-    };
-    
-    const email = renderEmailAllConfirmationsComplete({formData: submission.formData, secrets});
+    const {submissionId} = decodeAccessToken(accessToken);
+    const email = renderEmailAllConfirmationsComplete({formData: submission.formData, submissionId});
     await sendMail(email);
 }
   

@@ -5,17 +5,17 @@ import { decodeAccessToken, decryptData } from '../utils/token.js';
 const mandant = 'fachhochschule_schmalkalden'
 
 
-export async function storeNewSubmission({submissionId, encryptedFormData}) {
+export async function storeNewSubmission({submissionId, formData}) {
   await database.collection(mandant).insertOne({
     _id: submissionId,
-    encryptedFormData,
+    formData,
     confirmations: {},
     createdAt: new Date()
   });
 }
 
 export async function getSubmission(accessToken) {
-  const {submissionId, formEncryptionSecret} = decodeAccessToken(accessToken);
+  const {submissionId} = decodeAccessToken(accessToken);
   const document = await database.collection(mandant).findOne({ _id: submissionId });
 
   if (!document) {
@@ -23,7 +23,7 @@ export async function getSubmission(accessToken) {
   }
 
   return {
-    formData: decryptData(document.encryptedFormData, formEncryptionSecret),
+    formData: document.formData,
     confirmations: document.confirmations,
     createdAt: document.createdAt,
   }
@@ -37,10 +37,10 @@ export async function confirmSubmission({submissionId, userRole}) {
   await database.collection(mandant).updateOne({ _id: submissionId }, { $set: document });
 }
 
-export async function updateSubmission({submissionId, encryptedFormData}) {
+export async function updateSubmission({submissionId, formData}) {
   const document = await database.collection(mandant).findOne({ _id: submissionId });
 
-  document.encryptedFormData = encryptedFormData;
+  document.formData = formData;
 
   await database.collection(mandant).updateOne({ _id: submissionId }, { $set: document });
 }
@@ -59,19 +59,4 @@ export async function updateConfirmations({submissionId, confirmations}) {
     { _id: submissionId }, 
     { $set: { confirmations: updatedConfirmations } }
   );
-}
-
-export async function saveSubmission(formData) {
-  // For testing purposes, generate a simple token
-  const token = `test-token-${Date.now()}`;
-  await storeNewSubmission({ submissionId: token, encryptedFormData: JSON.stringify(formData) });
-  return token;
-}
-
-export async function getSubmissionById(token) {
-  const document = await database.collection(mandant).findOne({ _id: token });
-  if (!document) {
-    return null;
-  }
-  return JSON.parse(document.encryptedFormData);
 }

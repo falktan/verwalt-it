@@ -3,32 +3,26 @@ import crypto from 'crypto';
 
 /**
  * This file contains functionlity to handle secrets.
- * Data entered in the form is encrypted with a `formEncryptionSecret`.
- * This secret is NOT stored on the server.
- * Instead it is sent to all users via email as part of their `accessToken`.
- * The benefit of this is that only with both - data from one of the users AND
- * data stored in the database - the data can be accessed.
- * 
- * In addtion the `accessToken` is used to ensure that only the intended recipient can act according to his `userRole`.
+ * The `accessToken` is used to ensure that only the intended recipient can act according to his `userRole`.
  * To ensure this, the access token contains the `userRole`.
+ * The accessToken also contains the `submissionId` to identify the submission.
  */
 
 
 /**
  * 
  * @param accessToken an access token as created by createAccessToken
- * @returns an object like {submissionId, userRole, formEncryptionSecret}
+ * @returns an object like {submissionId, userRole}
  */
 export function decodeAccessToken(accessToken) {
     const encryptedData = JSON.parse(Buffer.from(accessToken, 'base64url').toString('utf-8'));
     return decryptData(encryptedData, process.env.ACCESS_TOKEN_ENCRYPTION_SECRET);
 }
 
-export function createAccessToken({submissionId, formEncryptionSecret, userRole}) {
+export function createAccessToken({submissionId, userRole}) {
     const payload = {
         submissionId: submissionId,
         userRole,
-        formEncryptionSecret: formEncryptionSecret
     }
 
     const data = encryptData(payload, process.env.ACCESS_TOKEN_ENCRYPTION_SECRET);

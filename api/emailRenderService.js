@@ -2,18 +2,18 @@ import 'dotenv/config';
 import { createAccessToken } from './utils/token.js';
 
 
-export function renderEmailsNewSubmission({formData, secrets}) {
+export function renderEmailsNewSubmission({formData, submissionId}) {
 	return [
-		renderEmailNewSubmissionStudent({formData, secrets}),
-		renderEmailNewSubmissionPruefungsamt({formData, secrets}),
-		renderEmailNewSubmissionBetreuer({formData, secrets, role: 'betreuer_betrieblich'}),
-		renderEmailNewSubmissionBetreuer({formData, secrets, role: 'betreuer_hochschule'}),
-		renderEmailNewSubmissionBetreuer({formData, secrets, role: 'korreferent'}),
+		renderEmailNewSubmissionStudent({formData, submissionId}),
+		renderEmailNewSubmissionPruefungsamt({formData, submissionId}),
+		renderEmailNewSubmissionBetreuer({formData, submissionId, role: 'betreuer_betrieblich'}),
+		renderEmailNewSubmissionBetreuer({formData, submissionId, role: 'betreuer_hochschule'}),
+		renderEmailNewSubmissionBetreuer({formData, submissionId, role: 'korreferent'}),
 	]
 }
 
-function renderEmailNewSubmissionStudent({formData, secrets}){
-	const accessToken = createAccessToken({submissionId: secrets.submissionId, formEncryptionSecret: secrets.formEncryptionSecret, userRole: 'student'})
+function renderEmailNewSubmissionStudent({formData, submissionId}){
+	const accessToken = createAccessToken({submissionId, userRole: 'student'})
 	const subject = `Anmeldung der Abschlussarbeit`
 	const body = `
 Sehr geehrte Frau/Herr ${formData.vorname} ${formData.nachname},
@@ -24,7 +24,7 @@ ${process.env.BASE_URL}/formular?token=${accessToken}`;
 	return {emailTo: [formData.email], subject, body};
 }
 
-function renderEmailNewSubmissionBetreuer({formData, secrets, role: userRole}){
+function renderEmailNewSubmissionBetreuer({formData, submissionId, role: userRole}){
 	const emailTo = [formData[userRole + '_email']]
 	const infoSentence = {
 		betreuer_betrieblich: 'Sie wurden als betrieblicher Betreuer angegeben.',
@@ -32,7 +32,7 @@ function renderEmailNewSubmissionBetreuer({formData, secrets, role: userRole}){
 		korreferent: 'Sie wurden als Korreferent angegeben.',
 	}
 
-	const accessToken = createAccessToken({submissionId: secrets.submissionId, formEncryptionSecret: secrets.formEncryptionSecret, userRole})
+	const accessToken = createAccessToken({submissionId, userRole})
 	const subject = `Anmeldung der Abschlussarbeit`
 	const body = `
 Sehr geehrte Damen und Herren,
@@ -44,8 +44,8 @@ ${process.env.BASE_URL}/formular?token=${accessToken}`;
 	return {emailTo, subject, body};
 }
 
-function renderEmailNewSubmissionPruefungsamt({formData, secrets}){
-	const accessToken = createAccessToken({submissionId: secrets.submissionId, formEncryptionSecret: secrets.formEncryptionSecret, userRole: 'pruefungsamt'})
+function renderEmailNewSubmissionPruefungsamt({formData, submissionId}){
+	const accessToken = createAccessToken({submissionId, userRole: 'pruefungsamt'})
 	const emailTo = [process.env.EMAIL_PRUEFUNGSAMT_TO]
 	const subject = `Anmeldung der Abschlussarbeit`
 	const body = `
@@ -57,8 +57,8 @@ ${process.env.BASE_URL}/formular?token=${accessToken}`;
 	return {emailTo, subject, body};
 }
 
-export function renderEmailAllConfirmationsComplete({formData, secrets}){
-	const accessToken = createAccessToken({submissionId: secrets.submissionId, formEncryptionSecret: secrets.formEncryptionSecret, userRole: 'pruefungsausschuss'})
+export function renderEmailAllConfirmationsComplete({formData, submissionId}){
+	const accessToken = createAccessToken({submissionId, userRole: 'pruefungsausschuss'})
 	const emailTo = [process.env.EMAIL_PRUEFUNGSAUSSCHUSS_TO]
 	const subject = `Alle Bestätigungen eingegangen - Abschlussarbeit`
 	const body = `
@@ -70,7 +70,7 @@ ${process.env.BASE_URL}/formular?token=${accessToken}`;
 	return {emailTo, subject, body};
 }
 
-export function renderEmailPruefungsausschussApproval({formData, secrets}){
+export function renderEmailPruefungsausschussApproval({formData}){
 	const emailTo = process.env.EMAIL_FINAL_APPROVAL_RECIPIENTS.split(',');
 	const subject = `Antrag auf Bachelorarbeit genehmigt - ${formData.vorname} ${formData.nachname}`
 	const body = `
