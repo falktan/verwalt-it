@@ -20,7 +20,6 @@ describe('Token Utils', () => {
       const originalData = {
         submissionId: 'test-submission-123',
         userRole: 'student',
-        formEncryptionSecret: 'test-encryption-secret',
         someOtherField: 'test-value'
       };
 
@@ -79,8 +78,7 @@ describe('Token Utils', () => {
     test('should create and decode access token correctly', () => {
       const payload = {
         submissionId: 'test-submission-456',
-        userRole: 'admin',
-        formEncryptionSecret: 'test-form-secret'
+        userRole: 'admin'
       };
 
       // Create access token
@@ -100,8 +98,7 @@ describe('Token Utils', () => {
     test('should remain unchanged when URL-encoded', () => {
       const payload = {
         submissionId: 'test-submission-789',
-        userRole: 'student',
-        formEncryptionSecret: 'test-form-secret-123'
+        userRole: 'student'
       };
       const accessToken = createAccessToken(payload);
       const urlEncodedToken = encodeURIComponent(accessToken);

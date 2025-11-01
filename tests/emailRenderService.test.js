@@ -19,10 +19,7 @@ describe('Email Render Service', () => {
     korreferent_email: 'betreuer.korreferent@example.com'
   };
 
-  const mockSecrets = {
-    submissionId: 'test-submission-123',
-    formEncryptionSecret: 'test-encryption-secret'
-  };
+  const mockSubmissionId = 'test-submission-123';
 
   beforeEach(() => {
     // Set up environment variables
@@ -39,7 +36,7 @@ describe('Email Render Service', () => {
   });
 
   test('should render all emails correctly', () => {
-    const result = renderEmailsNewSubmission({ formData: mockFormData, secrets: mockSecrets });
+    const result = renderEmailsNewSubmission({ formData: mockFormData, submissionId: mockSubmissionId });
     
     expect(result).toMatchSnapshot();
   });
