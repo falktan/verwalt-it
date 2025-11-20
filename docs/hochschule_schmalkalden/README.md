@@ -1,15 +1,15 @@
 
 # Hochschule Schmalkalden
 
-Das erste Verfahren ist die Batchelor-Arbeit. Hier gibt es folgende Schritte:
+Das erste Verfahren ist die Bachelor-Arbeit. Hier gibt es folgende Schritte:
 
-* Antrag zur Ausgabe der Batchelorarbeit
+* Antrag zur Ausgabe der Bachelorarbeit
 * Antrag zur Anmeldung zum Kolleguium
-* Antrag zur Beurteilung der Batchelorarbeit
+* Antrag zur Beurteilung der Bachelorarbeit
 
-## Antrag zur Ausgabe der Batchelorarbeit
+## Antrag zur Ausgabe der Bachelorarbeit
 Siehe: 
-https://verwalt-it.de/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-batchelorarbeit
+https://verwalt-it.de/hochschule-schmalkalden/fak-elektrotechnik/antrag-ausgabe-bachelorarbeit
 
 Der Antrag wird von Studenten ausgefüllt. Danach werden Emails an die im Antrag eingetragenen Referenten generiert. Die Emails enthalten jeweils einen Link zum Formular zusammen mit einem Token. Damit erreichen die Referenten eine Seite, die es ihnen erlaubt dem Antrag zuzustimmen. Parallel dazu wird eine Email ans Prüfungsamt generiert. Das Prüfungsamt trägt die Informationen über Immatrikulationsstatus und offene Prüfungen ein.
 

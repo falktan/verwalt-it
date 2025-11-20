@@ -14,7 +14,7 @@ Die Anwendung ist noch nicht produktiv im Einsatz.
 
 Aktuell ermöglicht die Anwendung die Anmeldung zur Abschlussarbeit. Nutzer können sich über ein Formular registrieren und ihre relevanten Daten eingeben. Die Anwendung speichert diese. Dem angegebenen Betreuer wird eine Email gesendet, welche einen Link enthält, welche es erlaubt das Formular einzusehen und zu bestätigen.
 
-![Antrag auf Ausgabe der Bachelorarbeit](docs/hochschule_schmalkalden/antrag_auf_ausgabe_der_batchelorarbeit.png)
+![Antrag auf Ausgabe der Bachelorarbeit](docs/hochschule_schmalkalden/antrag_auf_ausgabe_der_bachelorarbeit.png)
 
 ## Tools
 * npm, express, dotenv, mongoDB, jest
