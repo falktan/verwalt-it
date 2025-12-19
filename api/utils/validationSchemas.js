@@ -24,7 +24,7 @@ const baseFormDataSchema = {
   studiengang: noUrlValidation.required('Studiengang ist erforderlich'),
   vertiefungsrichtung: noUrlValidation.default(''),
   thema: noUrlValidation.required('Thema ist erforderlich'),
-  erste_bachelorarbeit: yup.string().oneOf(['ja', 'nein'], 'Ungültige Auswahl').required('Dieses Feld ist erforderlich'),
+  erste_bachelorarbeit: yup.string().oneOf(['ja'], 'Dieses Formular unterstützt nicht das Einreichen eines zweiten Antrags. Bitte brechen Sie den Vorgang ab und melden Sie sich beim verantwortlichen Prüfungsausschussvorsitzenden um den Antrag zu stellen.').required('Dieses Feld ist erforderlich'),
   einzelarbeit: yup.string().oneOf(['ja', 'nein'], 'Ungültige Auswahl').required('Dieses Feld ist erforderlich'),
   weitere_bearbeiter: noUrlValidation.default(''),
   noch_zu_erbringen: noUrlValidation.default(''),

@@ -89,4 +89,60 @@ describe('Create Submission Endpoint', () => {
     expect(data.details).toBeDefined();
     expect(Array.isArray(data.details)).toBe(true);
   });
+
+  test('POST /api/create-submission should reject erste_bachelorarbeit = "nein"', async () => {
+    const formData = {
+      nachname: 'Mustermann',
+      vorname: 'Max',
+      geburtsdatum: '2000-01-01',
+      geburtsort: 'Berlin',
+      matrikelnummer: '12345',
+      plz_ort: '10115 Berlin',
+      wohnanschrift: 'Musterstraße 1',
+      email: 'user@example.com',
+      studiengang: 'IT (722)',
+      vertiefungsrichtung: 'Software Engineering',
+      thema: 'Entwicklung einer modernen Webanwendung',
+      erste_bachelorarbeit: 'nein', // This should be rejected
+      einzelarbeit: 'ja',
+      weitere_bearbeiter: '',
+      noch_zu_erbringen: 'Keine',
+      unternehmen_institution: 'Musterfirma GmbH',
+      arbeitsort: 'Berlin',
+      betreuer_betrieblich_name: 'Dr. Schmidt',
+      betreuer_betrieblich_tel: '030-12345678',
+      betreuer_betrieblich_email: 'user@example.com',
+      betreuer_hochschule_grad: 'Prof. Dr.',
+      betreuer_hochschule_name: 'Müller',
+      betreuer_hochschule_tel: '03683-688-1234',
+      betreuer_hochschule_email: 'user@example.com',
+      korreferent_grad: 'Dr.',
+      korreferent_name: 'Weber',
+      korreferent_tel: '03683-688-5678',
+      korreferent_email: 'user@example.com',
+      datenschutz_zustimmung: 'on'
+    };
+
+    const response = await fetch(`http://localhost:${port}/api/create-submission`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ formData })
+    });
+
+    const data = await response.json();
+    
+    expect(response.status).toBe(400);
+    expect(data.error).toBe('Validation Error');
+    expect(data.details).toBeDefined();
+    expect(Array.isArray(data.details)).toBe(true);
+    
+    // Check if the error message contains the expected text
+    const ersteBachelorarbeitError = data.details.find(detail => 
+      detail.field === 'formData.erste_bachelorarbeit'
+    );
+    expect(ersteBachelorarbeitError).toBeDefined();
+    expect(ersteBachelorarbeitError.message).toContain('Dieses Formular unterstützt nicht das Einreichen eines zweiten Antrags');
+  });
 });
