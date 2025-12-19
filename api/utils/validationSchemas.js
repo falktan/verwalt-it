@@ -30,9 +30,9 @@ const baseFormDataSchema = {
   noch_zu_erbringen: noUrlValidation.default(''),
   unternehmen_institution: noUrlValidation.required('Unternehmen/Institution ist erforderlich'),
   arbeitsort: noUrlValidation.required('Arbeitsort ist erforderlich'),
-  betreuer_betrieblich_name: noUrlValidation.required('Name des betrieblichen Betreuers ist erforderlich'),
-  betreuer_betrieblich_tel: noUrlValidation.required('Telefon des betrieblichen Betreuers ist erforderlich'),
-  betreuer_betrieblich_email: yup.string().email('Ungültige E-Mail-Adresse').required('E-Mail des betrieblichen Betreuers ist erforderlich'),
+  betreuer_betrieblich_name: noUrlValidation.default(''),
+  betreuer_betrieblich_tel: noUrlValidation.default(''),
+  betreuer_betrieblich_email: yup.string().email('Ungültige E-Mail-Adresse').default(''),
   betreuer_hochschule_grad: noUrlValidation,
   betreuer_hochschule_name: noUrlValidation.required('Name des Hochschulbetreuers ist erforderlich'),
   betreuer_hochschule_tel: noUrlValidation.required('Telefon des Hochschulbetreuers ist erforderlich'),
@@ -67,7 +67,6 @@ const accessTokenSchema = yup.object({
 
 // Schema für Bestätigungen
 const confirmationsSchema = yup.object({
-  betreuer_betrieblich: yup.boolean().optional(),
   betreuer_hochschule: yup.boolean().optional(),
   korreferent: yup.boolean().optional(),
   pruefungsamt: yup.boolean().optional()

@@ -6,7 +6,6 @@ export function renderEmailsNewSubmission({formData, submissionId}) {
 	return [
 		renderEmailNewSubmissionStudent({formData, submissionId}),
 		renderEmailNewSubmissionPruefungsamt({formData, submissionId}),
-		renderEmailNewSubmissionBetreuer({formData, submissionId, role: 'betreuer_betrieblich'}),
 		renderEmailNewSubmissionBetreuer({formData, submissionId, role: 'betreuer_hochschule'}),
 		renderEmailNewSubmissionBetreuer({formData, submissionId, role: 'korreferent'}),
 	]
@@ -85,7 +84,6 @@ Antragsteller:
 - Thema: ${formData.thema}
 
 Betreuer:
-- Betrieblicher Betreuer: ${formData.betreuer_betrieblich_name} (${formData.betreuer_betrieblich_email})
 - Hochschulbetreuer: ${formData.betreuer_hochschule_name} (${formData.betreuer_hochschule_email})
 - Korreferent: ${formData.korreferent_name} (${formData.korreferent_email})
 

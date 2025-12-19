@@ -28,18 +28,6 @@ https://test.example.com/formular?token=test-access-token",
     "body": "
 Sehr geehrte Damen und Herren,
 von Max Mustermann wurde soeben das Formular zur Anmeldung der Abschlussarbeit ausgefüllt.
-Sie wurden als betrieblicher Betreuer angegeben.
-Bitte bestätigen Sie über folgenden Link die Anmeldung der Abschlussarbeit:
-https://test.example.com/formular?token=test-access-token",
-    "emailTo": [
-      "betreuer.betrieblich@example.com",
-    ],
-    "subject": "Anmeldung der Abschlussarbeit",
-  },
-  {
-    "body": "
-Sehr geehrte Damen und Herren,
-von Max Mustermann wurde soeben das Formular zur Anmeldung der Abschlussarbeit ausgefüllt.
 Sie wurden als Hochschulbetreuer angegeben.
 Bitte bestätigen Sie über folgenden Link die Anmeldung der Abschlussarbeit:
 https://test.example.com/formular?token=test-access-token",
