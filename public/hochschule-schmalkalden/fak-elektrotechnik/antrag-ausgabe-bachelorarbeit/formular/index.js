@@ -414,7 +414,9 @@ async function handleCancelSubmission(event) {
     });
     
     if (!response.ok) {
-      throw new Error('Fehler beim Löschen des Antrags');
+      const errorData = await response.json().catch(() => ({}));
+      const errorMessage = errorData.error || `Fehler beim Löschen des Antrags (Status: ${response.status})`;
+      throw new Error(errorMessage);
     }
     
     // Erfolg: Zeige Nachricht und deaktiviere alles
