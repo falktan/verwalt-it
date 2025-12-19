@@ -26,7 +26,6 @@ ${process.env.BASE_URL}/formular?token=${accessToken}`;
 function renderEmailNewSubmissionBetreuer({formData, submissionId, role: userRole}){
 	const emailTo = [formData[userRole + '_email']]
 	const infoSentence = {
-		betreuer_betrieblich: 'Sie wurden als betrieblicher Betreuer angegeben.',
 		betreuer_hochschule: 'Sie wurden als Hochschulbetreuer angegeben.',
 		korreferent: 'Sie wurden als Korreferent angegeben.',
 	}
