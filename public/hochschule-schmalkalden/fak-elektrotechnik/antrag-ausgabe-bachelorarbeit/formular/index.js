@@ -6,13 +6,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Setup HTML5 validation for erste_bachelorarbeit field
   const ersteBachelorarbeitField = document.querySelector('#erste_bachelorarbeit');
   if (ersteBachelorarbeitField) {
-    ersteBachelorarbeitField.addEventListener('change', function() {
+    const validateField = function() {
       if (this.value === 'nein') {
         this.setCustomValidity('Dieses Formular unterstützt nicht das Einreichen eines zweiten Antrags. Bitte brechen Sie den Vorgang ab und melden Sie sich beim verantwortlichen Prüfungsausschussvorsitzenden um den Antrag zu stellen.');
       } else {
         this.setCustomValidity('');
       }
-    });
+    };
+    
+    ersteBachelorarbeitField.addEventListener('change', validateField);
+    // Validate initial value in case field is pre-populated
+    validateField.call(ersteBachelorarbeitField);
   }
 
   if(!token) {
