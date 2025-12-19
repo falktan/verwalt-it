@@ -28,6 +28,16 @@ export default function getMockDatabase() {
                             Object.assign(doc, update.$set);
                         }
                         return doc;
+                    },
+                    deleteOne: async (query) => {
+                        const index = collections[name].data.findIndex(doc => {
+                            return Object.keys(query).every(key => doc[key] === query[key]);
+                        });
+                        if (index !== -1) {
+                            collections[name].data.splice(index, 1);
+                            return { deletedCount: 1 };
+                        }
+                        return { deletedCount: 0 };
                     }
                 };
             }

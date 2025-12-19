@@ -60,3 +60,13 @@ export async function updateConfirmations({submissionId, confirmations}) {
     { $set: { confirmations: updatedConfirmations } }
   );
 }
+
+export async function deleteSubmission({submissionId}) {
+  const result = await database.collection(mandant).deleteOne({ _id: submissionId });
+  
+  if (result.deletedCount === 0) {
+    throw new Error('Submission not found', submissionId);
+  }
+  
+  return result;
+}

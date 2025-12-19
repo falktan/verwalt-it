@@ -1,4 +1,4 @@
-import { storeNewSubmission, confirmSubmission, updateSubmission, getSubmission, updateConfirmations } from './dataStore/dataStoreService.js';
+import { storeNewSubmission, confirmSubmission, updateSubmission, getSubmission, updateConfirmations, deleteSubmission } from './dataStore/dataStoreService.js';
 import { decodeAccessToken, createSecret, encryptData } from './utils/token.js';
 import { renderEmailsNewSubmission, renderEmailAllConfirmationsComplete, renderEmailPruefungsausschussApproval } from './emailRenderService.js';
 import { sendMail } from './sendMailService.js';
@@ -39,6 +39,12 @@ export async function handlePruefungsausschussApproval({accessToken}) {
     const submission = await getSubmission(accessToken);
     
     await sendEmailPruefungsausschussApproval({formData: submission.formData, submissionId});
+}
+
+export async function handleDeleteSubmission({accessToken}) {
+    const {submissionId} = decodeAccessToken(accessToken);
+    
+    await deleteSubmission({submissionId});
 }
 
 async function sendEmailsNewSubmission({formData, submissionId}) {

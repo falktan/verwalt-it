@@ -93,6 +93,8 @@ export const schemas = {
     accessToken: yup.string().required('Access Token ist erforderlich')
   }).noUnknown(true),
 
-  approveSubmission: accessTokenSchema
+  approveSubmission: accessTokenSchema,
+
+  deleteSubmission: accessTokenSchema
 };
 
