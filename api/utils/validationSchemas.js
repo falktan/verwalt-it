@@ -68,8 +68,8 @@ const formDataSchemaUpdate = yup.object({
 const formDataSchemaPruefungsausschussUpdate = yup.object({
   ...baseFormDataSchema,
   pruefungsleistungen_noch_zu_erbringen: noUrlValidation.default(''),
-  immatrikulation_laufend: yup.string().oneOf(['ja', 'nein'], 'Ungültige Auswahl').required('Immatrikulation im laufenden Semester ist erforderlich'),
-  zulassung_praxissemester: yup.string().oneOf(['ja', 'nein'], 'Ungültige Auswahl').required('Zulassung zum Praxissemester ist erforderlich'),
+  immatrikulation_laufend: yup.string().oneOf(['ja', 'nein', ''], 'Ungültige Auswahl').default(''),
+  zulassung_praxissemester: yup.string().oneOf(['ja', 'nein', ''], 'Ungültige Auswahl').default(''),
   ausgabedatum: yup.string().required('Ausgabedatum ist erforderlich'),
   abgabedatum: yup.string().required('Abgabedatum ist erforderlich')
 }).noUnknown(true, 'Unbekannte Felder sind nicht erlaubt');
