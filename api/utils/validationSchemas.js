@@ -49,7 +49,9 @@ const formDataSchemaInitial = yup.object({
   ...baseFormDataSchema,
   pruefungsleistungen_noch_zu_erbringen: noUrlValidation.default(''),
   immatrikulation_laufend: yup.string().oneOf(['ja', 'nein', ''], 'Ungültige Auswahl').default(''),
-  zulassung_praxissemester: yup.string().oneOf(['ja', 'nein', ''], 'Ungültige Auswahl').default('')
+  zulassung_praxissemester: yup.string().oneOf(['ja', 'nein', ''], 'Ungültige Auswahl').default(''),
+  ausgabedatum: yup.string().default(''),
+  abgabedatum: yup.string().default('')
 }).noUnknown(true, 'Unbekannte Felder sind nicht erlaubt');
 
 // Schema für Updates durch Prüfungsamt (Prüfungsamt-Felder Pflicht)
@@ -57,7 +59,19 @@ const formDataSchemaUpdate = yup.object({
   ...baseFormDataSchema,
   pruefungsleistungen_noch_zu_erbringen: noUrlValidation.default(''),
   immatrikulation_laufend: yup.string().oneOf(['ja', 'nein'], 'Ungültige Auswahl').required('Immatrikulation im laufenden Semester ist erforderlich'),
-  zulassung_praxissemester: yup.string().oneOf(['ja', 'nein'], 'Ungültige Auswahl').required('Zulassung zum Praxissemester ist erforderlich')
+  zulassung_praxissemester: yup.string().oneOf(['ja', 'nein'], 'Ungültige Auswahl').required('Zulassung zum Praxissemester ist erforderlich'),
+  ausgabedatum: yup.string().default(''),
+  abgabedatum: yup.string().default('')
+}).noUnknown(true, 'Unbekannte Felder sind nicht erlaubt');
+
+// Schema für Updates durch Prüfungsausschuss (Datumsfelder Pflicht)
+const formDataSchemaPruefungsausschussUpdate = yup.object({
+  ...baseFormDataSchema,
+  pruefungsleistungen_noch_zu_erbringen: noUrlValidation.default(''),
+  immatrikulation_laufend: yup.string().oneOf(['ja', 'nein'], 'Ungültige Auswahl').required('Immatrikulation im laufenden Semester ist erforderlich'),
+  zulassung_praxissemester: yup.string().oneOf(['ja', 'nein'], 'Ungültige Auswahl').required('Zulassung zum Praxissemester ist erforderlich'),
+  ausgabedatum: yup.string().required('Ausgabedatum ist erforderlich'),
+  abgabedatum: yup.string().required('Abgabedatum ist erforderlich')
 }).noUnknown(true, 'Unbekannte Felder sind nicht erlaubt');
 
 // Schema für Access Token
@@ -84,6 +98,11 @@ export const schemas = {
 
   updateSubmission: yup.object({
     formData: formDataSchemaUpdate.required(),
+    accessToken: yup.string().required('Access Token ist erforderlich')
+  }).noUnknown(true),
+
+  updatePruefungsausschussSubmission: yup.object({
+    formData: formDataSchemaPruefungsausschussUpdate.required(),
     accessToken: yup.string().required('Access Token ist erforderlich')
   }).noUnknown(true),
 

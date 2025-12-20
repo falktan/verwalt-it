@@ -41,6 +41,12 @@ router.post('/update-submission', validateRequest(schemas.updateSubmission), req
   res.json({ message: 'Submission updated successfully' });
 });
 
+router.post('/update-pruefungsausschuss-submission', validateRequest(schemas.updatePruefungsausschussSubmission), requireRole(['pruefungsausschuss']), async function(req, res, next) {
+  const { formData, accessToken } = req.body;
+  await handleUpdate({formData, accessToken});
+  res.json({ message: 'Submission updated successfully' });
+});
+
 router.post('/update-confirmations', validateRequest(schemas.updateConfirmations), requireRole(['pruefungsamt']), async function(req, res, next) {
   const { confirmations, accessToken } = req.body;
   await handleUpdateConfirmations({confirmations, accessToken});
