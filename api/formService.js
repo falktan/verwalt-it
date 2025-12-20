@@ -61,7 +61,7 @@ function createSubmissionId() {
 }
 
 async function checkAndHandleCompletion(accessToken) {
-    const requiredConfirmations = ['betreuer_betrieblich', 'betreuer_hochschule', 'korreferent', 'pruefungsamt'];
+    const requiredConfirmations = ['betreuer_hochschule', 'korreferent', 'pruefungsamt'];
 
     const submission = await getSubmission(accessToken)
     const confirmations = submission.confirmations;

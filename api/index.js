@@ -27,7 +27,7 @@ router.post('/fetch-submission', validateRequest(schemas.fetchSubmission), requi
 
 router.post('/confirm-submission',
   validateRequest(schemas.confirmSubmission),
-  requireRole(['pruefungsamt','betreuer_betrieblich', 'betreuer_hochschule', 'korreferent']),
+  requireRole(['pruefungsamt', 'betreuer_hochschule', 'korreferent']),
   async function(req, res, next) {
 
   const { accessToken } = req.body;

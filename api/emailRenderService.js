@@ -6,7 +6,6 @@ export function renderEmailsNewSubmission({formData, submissionId}) {
 	return [
 		renderEmailNewSubmissionStudent({formData, submissionId}),
 		renderEmailNewSubmissionPruefungsamt({formData, submissionId}),
-		renderEmailNewSubmissionBetreuer({formData, submissionId, role: 'betreuer_betrieblich'}),
 		renderEmailNewSubmissionBetreuer({formData, submissionId, role: 'betreuer_hochschule'}),
 		renderEmailNewSubmissionBetreuer({formData, submissionId, role: 'korreferent'}),
 	]
@@ -27,7 +26,6 @@ ${process.env.BASE_URL}/formular?token=${accessToken}`;
 function renderEmailNewSubmissionBetreuer({formData, submissionId, role: userRole}){
 	const emailTo = [formData[userRole + '_email']]
 	const infoSentence = {
-		betreuer_betrieblich: 'Sie wurden als betrieblicher Betreuer angegeben.',
 		betreuer_hochschule: 'Sie wurden als Hochschulbetreuer angegeben.',
 		korreferent: 'Sie wurden als Korreferent angegeben.',
 	}
@@ -73,6 +71,12 @@ ${process.env.BASE_URL}/formular?token=${accessToken}`;
 export function renderEmailPruefungsausschussApproval({formData}){
 	const emailTo = process.env.EMAIL_FINAL_APPROVAL_RECIPIENTS.split(',');
 	const subject = `Antrag auf Bachelorarbeit genehmigt - ${formData.vorname} ${formData.nachname}`
+	
+	// Conditionally include betrieblicher Betreuer if filled
+	const betrieblichBetreuerLine = formData.betreuer_betrieblich_name && formData.betreuer_betrieblich_email
+		? `- Betrieblicher Betreuer: ${formData.betreuer_betrieblich_name} (${formData.betreuer_betrieblich_email})\n`
+		: '';
+	
 	const body = `
 Sehr geehrte Damen und Herren,
 
@@ -85,8 +89,7 @@ Antragsteller:
 - Thema: ${formData.thema}
 
 Betreuer:
-- Betrieblicher Betreuer: ${formData.betreuer_betrieblich_name} (${formData.betreuer_betrieblich_email})
-- Hochschulbetreuer: ${formData.betreuer_hochschule_name} (${formData.betreuer_hochschule_email})
+${betrieblichBetreuerLine}- Hochschulbetreuer: ${formData.betreuer_hochschule_name} (${formData.betreuer_hochschule_email})
 - Korreferent: ${formData.korreferent_name} (${formData.korreferent_email})
 
 Der Antrag wurde vom Prüfungsausschuss genehmigt und kann nun bearbeitet werden.

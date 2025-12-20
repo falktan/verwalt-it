@@ -23,11 +23,10 @@
           <ul>
             <li>Referent (Hochschulbetreuer)</li>
             <li>Korreferent (Hochschulbetreuer)</li>
-            <li>Betreuer (Betrieblicher Betreuer)</li>
           </ul>
         </p>
         <h3>Was passiert danach?</h3>
-        <p>Die Betreuern werden per E-Mail über Ihre Anmeldung informiert und erhalten einen Link um das Formular
+        <p>Die Hochschulbetreuer (Referent und Korreferent) werden per E-Mail über Ihre Anmeldung informiert und erhalten einen Link, um das Formular
           einzusehen und zu bestätigen.
           Sie erhalten auch eine E-Mail mit einem Link zur Nachverfolgung des Status Ihrer Anmeldung.
         </p>
@@ -57,20 +56,11 @@
       </div>
     </div>
 
-    <div id="role-info-betreuer_betrieblich" class="role-info" style="display: none;">
-      <div class="info-box">
-        <h3>Betrieblicher Betreuer - Bestätigung</h3>
-        <p>Sie wurden als betrieblicher Betreuer für diese Bachelorarbeit angegeben.</p>
-        <p><strong>Ihre Aufgabe:</strong> Bestätigen Sie die Anmeldung, wenn Sie mit der Betreuung einverstanden sind.</p>
-        <p><strong>Hinweis:</strong> Das Formular ist schreibgeschützt. Sie können nur Ihre Bestätigung abgeben.</p>
-      </div>
-    </div>
-
     <div id="role-info-betreuer_hochschule" class="role-info" style="display: none;">
       <div class="info-box">
         <h3>Hochschulbetreuer - Bestätigung</h3>
         <p>Sie wurden als Hochschulbetreuer (Referent) für diese Bachelorarbeit angegeben.</p>
-        <p><strong>Ihre Aufgabe:</strong> Bestätigen Sie die Anmeldung, wenn Sie mit der Betreuung einverstanden sind.</p>
+        <p><strong>Ihre Aufgabe:</strong> Bestätigen Sie die Anmeldung, wenn Sie mit der Betreuung einverstanden sind. Sind Sie nicht einverstanden, wenden Sie sich an den Studierenden, welcher die Korrektur oder den Abbruch des Antrags beim Prüfungsamt anfragen soll.</p>
         <p><strong>Hinweis:</strong> Das Formular ist schreibgeschützt. Sie können nur Ihre Bestätigung abgeben.</p>
       </div>
     </div>
@@ -79,7 +69,7 @@
       <div class="info-box">
         <h3>Korreferent - Bestätigung</h3>
         <p>Sie wurden als Korreferent für diese Bachelorarbeit angegeben.</p>
-        <p><strong>Ihre Aufgabe:</strong> Bestätigen Sie die Anmeldung, wenn Sie mit der Betreuung einverstanden sind.</p>
+        <p><strong>Ihre Aufgabe:</strong> Bestätigen Sie die Anmeldung, wenn Sie mit der Betreuung einverstanden sind. Sind Sie nicht einverstanden, wenden Sie sich an den Studierenden, welcher die Korrektur oder den Abbruch des Antrags beim Prüfungsamt anfragen soll.</p>
         <p><strong>Hinweis:</strong> Das Formular ist schreibgeschützt. Sie können nur Ihre Bestätigung abgeben.</p>
       </div>
     </div>
@@ -212,19 +202,19 @@
         <textarea id="arbeitsort" name="arbeitsort" required></textarea>
       </div>
 
-      <h3>Betrieblicher Betreuer</h3>
+      <h3>Betrieblicher Betreuer (falls abweichend von Korreferent)</h3>
 
       <div class="field half">
-        <label for="betreuer_betrieblich_name">Name: <span class="required">*</span></label>
-        <input type="text" id="betreuer_betrieblich_name" name="betreuer_betrieblich_name" required>
+        <label for="betreuer_betrieblich_name">Name:</label>
+        <input type="text" id="betreuer_betrieblich_name" name="betreuer_betrieblich_name">
       </div>
       <div class="field half">
-        <label for="betreuer_betrieblich_tel">Telefon: <span class="required">*</span></label>
-        <input type="tel" id="betreuer_betrieblich_tel" name="betreuer_betrieblich_tel" required>
+        <label for="betreuer_betrieblich_tel">Telefon:</label>
+        <input type="tel" id="betreuer_betrieblich_tel" name="betreuer_betrieblich_tel">
       </div>
       <div class="field full">
-        <label for="betreuer_betrieblich_email">E-Mail: <span class="required">*</span></label>
-        <input type="email" id="betreuer_betrieblich_email" name="betreuer_betrieblich_email" required>
+        <label for="betreuer_betrieblich_email">E-Mail:</label>
+        <input type="email" id="betreuer_betrieblich_email" name="betreuer_betrieblich_email">
       </div>
 
       <h2>Referentenvorschlag</h2>
