@@ -71,6 +71,12 @@ ${process.env.BASE_URL}/formular?token=${accessToken}`;
 export function renderEmailPruefungsausschussApproval({formData}){
 	const emailTo = process.env.EMAIL_FINAL_APPROVAL_RECIPIENTS.split(',');
 	const subject = `Antrag auf Bachelorarbeit genehmigt - ${formData.vorname} ${formData.nachname}`
+	
+	// Conditionally include betrieblicher Betreuer if filled
+	const betrieblichBetreuerLine = formData.betreuer_betrieblich_name && formData.betreuer_betrieblich_email
+		? `- Betrieblicher Betreuer: ${formData.betreuer_betrieblich_name} (${formData.betreuer_betrieblich_email})\n`
+		: '';
+	
 	const body = `
 Sehr geehrte Damen und Herren,
 
@@ -83,7 +89,7 @@ Antragsteller:
 - Thema: ${formData.thema}
 
 Betreuer:
-- Hochschulbetreuer: ${formData.betreuer_hochschule_name} (${formData.betreuer_hochschule_email})
+${betrieblichBetreuerLine}- Hochschulbetreuer: ${formData.betreuer_hochschule_name} (${formData.betreuer_hochschule_email})
 - Korreferent: ${formData.korreferent_name} (${formData.korreferent_email})
 
 Der Antrag wurde vom Prüfungsausschuss genehmigt und kann nun bearbeitet werden.

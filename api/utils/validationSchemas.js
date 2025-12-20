@@ -32,14 +32,7 @@ const baseFormDataSchema = {
   arbeitsort: noUrlValidation.required('Arbeitsort ist erforderlich'),
   betreuer_betrieblich_name: noUrlValidation.default(''),
   betreuer_betrieblich_tel: noUrlValidation.default(''),
-  betreuer_betrieblich_email: yup.string().default('').test(
-    'is-valid-email-if-provided',
-    'Ungültige E-Mail-Adresse',
-    function(value) {
-      if (!value || value.trim() === '') return true; // Allow empty
-      return yup.string().email().isValidSync(value); // Validate if provided
-    }
-  ),
+  betreuer_betrieblich_email: yup.string().email('Ungültige E-Mail-Adresse'),
   betreuer_hochschule_grad: noUrlValidation,
   betreuer_hochschule_name: noUrlValidation.required('Name des Hochschulbetreuers ist erforderlich'),
   betreuer_hochschule_tel: noUrlValidation.required('Telefon des Hochschulbetreuers ist erforderlich'),
