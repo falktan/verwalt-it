@@ -46,6 +46,7 @@ function populateForm(formData) {
 function updateForm() {
   const {userRole} = submissionData;
   const submitButton = document.querySelector('#submit-button');
+  const deleteButton = document.querySelector('#delete-button');
 
   // Zeige rollenspezifische Info-Box an
   showRoleInfo(userRole);
@@ -60,12 +61,14 @@ function updateForm() {
   } else if(userRole === 'pruefungsamt') {
     submitButton.value = 'Speichern';
     addConfirmationFields();
+    deleteButton.style.display = 'inline-block';
   } else if(['betreuer_hochschule', 'korreferent'].includes(userRole)) {
     submitButton.value = 'Bestätigen';
     disableForm();
   } else if(userRole === 'pruefungsausschuss') {
     submitButton.value = 'Antrag genehmigen';
     addConfirmationFields();
+    deleteButton.style.display = 'inline-block';
   }
 }
 
@@ -374,5 +377,62 @@ function hideMessage() {
   messageContainer.innerHTML = '';
 }
 
-// Make handleFormSubmit globally available for the HTML form
+async function handleCancelSubmission(event) {
+  event.preventDefault();
+  
+  // Bestätigungsdialog anzeigen
+  const confirmed = confirm('Möchten Sie diesen Antrag wirklich abbrechen und löschen? Diese Aktion kann nicht rückgängig gemacht werden.');
+  
+  if (!confirmed) {
+    return;
+  }
+  
+  const token = getAccessToken();
+  const deleteButton = document.querySelector('#delete-button');
+  const submitButton = document.querySelector('#submit-button');
+  const originalButtonText = deleteButton.textContent;
+  
+  // Deaktiviere Buttons und ändere Text
+  deleteButton.disabled = true;
+  deleteButton.textContent = 'Wird gelöscht...';
+  submitButton.disabled = true;
+  
+  // Verstecke vorherige Nachrichten
+  hideMessage();
+  
+  try {
+    const response = await fetch('/api/delete-submission', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({accessToken: token})
+    });
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      const errorMessage = errorData.error || `Fehler beim Löschen des Antrags (Status: ${response.status})`;
+      throw new Error(errorMessage);
+    }
+    
+    // Erfolg: Zeige Nachricht und deaktiviere alles
+    const messageContainer = document.querySelector('#message-container');
+    messageContainer.innerHTML = '<div class="info-box"><p><strong>Der Antrag wurde erfolgreich gelöscht.</strong></p></div>';
+    messageContainer.style.display = 'block';
+    messageContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    
+    // Formular und Buttons deaktivieren
+    disableForm();
+    deleteButton.style.display = 'none';
+    submitButton.style.display = 'none';
+    
+  } catch (error) {
+    // Bei Fehler: Button wieder aktivieren und Fehlermeldung anzeigen
+    deleteButton.disabled = false;
+    deleteButton.textContent = originalButtonText;
+    submitButton.disabled = false;
+    showErrorMessage(error.message);
+  }
+}
+
+// Make functions globally available for the HTML form
 window.handleFormSubmit = handleFormSubmit;
+window.handleCancelSubmission = handleCancelSubmission;

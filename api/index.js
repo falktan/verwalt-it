@@ -1,5 +1,5 @@
 import express from 'express';
-import { fetchSubmission, handleCreate, handleConfirm, handleUpdate, handleUpdateConfirmations, handlePruefungsausschussApproval } from './formService.js';
+import { fetchSubmission, handleCreate, handleConfirm, handleUpdate, handleUpdateConfirmations, handlePruefungsausschussApproval, handleDeleteSubmission } from './formService.js';
 import { requireAccessToken, requireRole } from './utils/permissionHelper.js';
 import { validateRequest } from './utils/validationMiddleware.js';
 import { schemas } from './utils/validationSchemas.js';
@@ -51,6 +51,12 @@ router.post('/approve-submission', validateRequest(schemas.approveSubmission), r
   const { accessToken } = req.body;
   await handlePruefungsausschussApproval({accessToken});
   res.json({ message: 'Submission approved and notification emails sent successfully' });
+});
+
+router.post('/delete-submission', validateRequest(schemas.deleteSubmission), requireRole(['pruefungsamt', 'pruefungsausschuss']), async function(req, res, next) {
+  const { accessToken } = req.body;
+  await handleDeleteSubmission({accessToken});
+  res.json({ message: 'Submission deleted successfully' });
 });
 
 
