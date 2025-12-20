@@ -46,7 +46,7 @@ function populateForm(formData) {
 function updateForm() {
   const {userRole} = submissionData;
   const submitButton = document.querySelector('#submit-button');
-  const cancelButton = document.querySelector('#cancel-button');
+  const deleteButton = document.querySelector('#delete-button');
 
   // Zeige rollenspezifische Info-Box an
   showRoleInfo(userRole);
@@ -61,14 +61,14 @@ function updateForm() {
   } else if(userRole === 'pruefungsamt') {
     submitButton.value = 'Speichern';
     addConfirmationFields();
-    cancelButton.style.display = 'inline-block';
+    deleteButton.style.display = 'inline-block';
   } else if(['betreuer_betrieblich', 'betreuer_hochschule', 'korreferent'].includes(userRole)) {
     submitButton.value = 'Bestätigen';
     disableForm();
   } else if(userRole === 'pruefungsausschuss') {
     submitButton.value = 'Antrag genehmigen';
     addConfirmationFields();
-    cancelButton.style.display = 'inline-block';
+    deleteButton.style.display = 'inline-block';
   }
 }
 
@@ -394,13 +394,13 @@ async function handleCancelSubmission(event) {
   }
   
   const token = getAccessToken();
-  const cancelButton = document.querySelector('#cancel-button');
+  const deleteButton = document.querySelector('#delete-button');
   const submitButton = document.querySelector('#submit-button');
-  const originalButtonText = cancelButton.textContent;
+  const originalButtonText = deleteButton.textContent;
   
   // Deaktiviere Buttons und ändere Text
-  cancelButton.disabled = true;
-  cancelButton.textContent = 'Wird gelöscht...';
+  deleteButton.disabled = true;
+  deleteButton.textContent = 'Wird gelöscht...';
   submitButton.disabled = true;
   
   // Verstecke vorherige Nachrichten
@@ -427,13 +427,13 @@ async function handleCancelSubmission(event) {
     
     // Formular und Buttons deaktivieren
     disableForm();
-    cancelButton.style.display = 'none';
+    deleteButton.style.display = 'none';
     submitButton.style.display = 'none';
     
   } catch (error) {
     // Bei Fehler: Button wieder aktivieren und Fehlermeldung anzeigen
-    cancelButton.disabled = false;
-    cancelButton.textContent = originalButtonText;
+    deleteButton.disabled = false;
+    deleteButton.textContent = originalButtonText;
     submitButton.disabled = false;
     showErrorMessage(error.message);
   }
