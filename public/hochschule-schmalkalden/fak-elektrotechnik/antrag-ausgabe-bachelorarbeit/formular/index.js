@@ -54,6 +54,9 @@ function updateForm() {
   // Steuere Prüfungsamt-Felder basierend auf Benutzerrolle
   updatePruefungsamtFields(userRole);
 
+  // Steuere Prüfungsausschuss-Felder basierend auf Benutzerrolle
+  updatePruefungsausschussFields(userRole);
+
   if(userRole === 'student') {
     submitButton.style.display = 'none';
     addConfirmationFields();
@@ -135,6 +138,51 @@ function updatePruefungsamtFields(userRole) {
       }
     }
   });
+}
+
+function updatePruefungsausschussFields(userRole) {
+  const heading = document.querySelector('#pruefungsausschuss-fields-heading');
+  const dateFieldsContainer = document.querySelector('#pruefungsausschuss-date-fields');
+  const pruefungsausschussFields = ['ausgabedatum', 'abgabedatum'];
+
+  if (userRole === 'pruefungsausschuss') {
+    // Für Prüfungsausschuss: Felder sichtbar und Pflicht
+    if (heading) heading.style.display = 'block';
+    if (dateFieldsContainer) dateFieldsContainer.style.display = 'contents';
+
+    pruefungsausschussFields.forEach(fieldName => {
+      const field = document.querySelector(`[name="${fieldName}"]`);
+      if (!field) return;
+
+      field.disabled = false;
+      field.required = true;
+
+      const label = document.querySelector(`label[for="${field.id}"]`);
+      if (label && !label.querySelector('.required')) {
+        label.innerHTML += ' <span class="required">*</span>';
+      }
+    });
+  } else {
+    // Für alle anderen Rollen: Felder versteckt und nicht Pflicht
+    if (heading) heading.style.display = 'none';
+    if (dateFieldsContainer) dateFieldsContainer.style.display = 'none';
+
+    pruefungsausschussFields.forEach(fieldName => {
+      const field = document.querySelector(`[name="${fieldName}"]`);
+      if (!field) return;
+
+      field.disabled = true;
+      field.required = false;
+
+      const label = document.querySelector(`label[for="${field.id}"]`);
+      if (label) {
+        const requiredSpan = label.querySelector('.required');
+        if (requiredSpan) {
+          requiredSpan.remove();
+        }
+      }
+    });
+  }
 }
 
 function addConfirmationFields() {
@@ -272,13 +320,27 @@ async function handleConfirmSubmission(token) {
 }
 
 async function handleApproveSubmission(token) {
-  const response = await fetch('/api/approve-submission', {
+  const formData = getFormData();
+  
+  // First update the form data with the new date fields
+  const updateResponse = await fetch('/api/update-pruefungsausschuss-submission', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({formData, accessToken: token})
+  });
+  
+  if (!updateResponse.ok) {
+    throw new Error('Fehler beim Aktualisieren der Daten');
+  }
+  
+  // Then approve the submission
+  const approveResponse = await fetch('/api/approve-submission', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({accessToken: token})
   });
   
-  if (!response.ok) {
+  if (!approveResponse.ok) {
     throw new Error('Fehler beim Genehmigen des Antrags');
   }
 }
